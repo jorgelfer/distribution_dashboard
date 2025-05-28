@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Distribution System Dashboard",
-  description: "This is a dashboard for visualizing operations planning for distribution systems.",
+  description:
+    "This is a dashboard for visualizing operations planning for distribution systems.",
 };
 
 export default function RootLayout({
