@@ -1,17 +1,22 @@
+"use client";
+
+import { useState } from "react";
+
 import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "@/components/header";
 import Todos from "@/components/todos";
 import Todo from "@/models/todo";
+import NewTodo from "@/components/newTodo";
 
 export default function Home() {
-  const todos = [
-    new Todo("Buy groceries"),
-    new Todo("Walk the dog"),
-    new Todo("Finish project report"),
-    new Todo("Call mom"),
-    new Todo("Read a book"),
-  ];
+  // this state is a list of todos
+  const [todos, setTodos] = useState<Todo[]>([]);
+
+  const addTodoHandler = (todoText: string) => {
+    const newTodo = new Todo(todoText);
+    setTodos((prevTodos) => [...prevTodos, newTodo]);
+  };
 
   return (
     <>
@@ -22,6 +27,7 @@ export default function Home() {
           <Link href="/about">About us</Link>
         </p>
         <div>
+          <NewTodo onAddTodo={addTodoHandler} />
           <Todos items={todos} />
         </div>
       </main>

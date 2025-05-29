@@ -1,0 +1,32 @@
+import { useRef } from "react";
+
+// we need define the type of the onAddTodo prop
+// we are not returning anything from this function,
+// so we can use void as the return type
+const NewTodo: React.FC<{ onAddTodo: (title: string) => void }> = (props) => {
+  const todoTextInputRef = useRef<HTMLInputElement>(null);
+
+  const submitHandle = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    // use ! if you are sure that the ref will not be null
+    // use ? if you are not sure
+    const enteredText = todoTextInputRef.current!.value;
+    if (enteredText.trim().length === 0) {
+      // throw an error or show a message
+      return;
+    }
+
+    props.onAddTodo(enteredText);
+  };
+
+  return (
+    <form onSubmit={submitHandle}>
+      <label htmlFor="text"> Todo text </label>
+      <input type="text" id="text" ref={todoTextInputRef} />
+      <button>Add Todo</button>
+    </form>
+  );
+};
+
+export default NewTodo;
