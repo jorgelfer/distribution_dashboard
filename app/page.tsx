@@ -1,23 +1,13 @@
 "use client";
 
-import { useState } from "react";
-
 import styles from "./page.module.css";
 import Link from "next/link";
 import Header from "@/components/header";
 import Todos from "@/components/todos";
-import Todo from "@/models/todo";
 import NewTodo from "@/components/newTodo";
+import TodosContextProvider from "@/store/todos-context";
 
 export default function Home() {
-  // this state is a list of todos
-  const [todos, setTodos] = useState<Todo[]>([]);
-
-  const addTodoHandler = (todoText: string) => {
-    const newTodo = new Todo(todoText);
-    setTodos((prevTodos) => [...prevTodos, newTodo]);
-  };
-
   return (
     <>
       <Header />
@@ -26,10 +16,10 @@ export default function Home() {
         <p>
           <Link href="/about">About us</Link>
         </p>
-        <div>
-          <NewTodo onAddTodo={addTodoHandler} />
-          <Todos items={todos} />
-        </div>
+        <TodosContextProvider>
+          <NewTodo />
+          <Todos />
+        </TodosContextProvider>
       </main>
     </>
   );

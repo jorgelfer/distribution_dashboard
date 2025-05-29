@@ -1,10 +1,13 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
 import styles from "./newTodo.module.css";
+import { TodosContext } from "../store/todos-context";
 
 // we need define the type of the onAddTodo prop
 // we are not returning anything from this function,
 // so we can use void as the return type
-const NewTodo: React.FC<{ onAddTodo: (title: string) => void }> = (props) => {
+const NewTodo: React.FC = () => {
+  const todosCtx = useContext(TodosContext);
+
   const todoTextInputRef = useRef<HTMLInputElement>(null);
 
   const submitHandle = (event: React.FormEvent) => {
@@ -18,7 +21,7 @@ const NewTodo: React.FC<{ onAddTodo: (title: string) => void }> = (props) => {
       return;
     }
 
-    props.onAddTodo(enteredText);
+    todosCtx.addTodo(enteredText);
   };
 
   return (
