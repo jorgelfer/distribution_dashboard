@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import styles from "./newTodo.module.css";
 
 // we need define the type of the onAddTodo prop
 // we are not returning anything from this function,
@@ -21,7 +22,7 @@ const NewTodo: React.FC<{ onAddTodo: (title: string) => void }> = (props) => {
   };
 
   return (
-    <form onSubmit={submitHandle}>
+    <form onSubmit={submitHandle} className={styles.form}>
       <label htmlFor="text"> Todo text </label>
       <input type="text" id="text" ref={todoTextInputRef} />
       <button>Add Todo</button>
