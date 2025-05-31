@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./login.module.css";
+import CaseFormSubmit from "@/components/case/case-form-submit";
 // import getDSS from "@/lib/actions";
 
 // ({ values, onEnteredValues, onSubmitted })
@@ -20,33 +21,36 @@ const networks = [
   },
 ];
 
-export default function Login({ values, onEnteredValues, onSubmitted }) {
+export default function Login() {
   return (
-    <form className={styles.form}>
-      <h2 className={styles["login-header"]}>CASE DEFINITION</h2>
-      <div className={styles["control-row"]}>
-        <div className={styles["control no-margin"]}>
-          <label htmlFor="dropdown">Network Model</label>
-          <select id="network-model">
-            <option value="13Bus">13 Bus</option>
-            {networks.map((network) => (
-              <option key={network.value} value={network.value}>
-                {network.label}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div className={styles["control no-margin"]}>
-          <label htmlFor="text">InFile1</label>
-          <input id="infile1" type="text" name="infile1" />
-        </div>
-      </div>
-      <p className={styles["form-actions"]}>
-        <button type="reset" className={styles["login-button button-flat"]}>
-          Reset
-        </button>
-        <button className={styles["login-button"]}>Run qsts</button>
-      </p>
-    </form>
+    <>
+      <header className={styles.header}>
+        <h1>Case definition</h1>
+      </header>
+      <main className={styles.main}>
+        <form className={styles.form}>
+          <div className={styles.row}>
+            <p>
+              <label htmlFor="dropdown">Network Model</label>
+              <select id="network-model">
+                <option value="13Bus">13 Bus</option>
+                {networks.map((network) => (
+                  <option key={network.value} value={network.value}>
+                    {network.label}
+                  </option>
+                ))}
+              </select>
+            </p>
+            <p>
+              <label htmlFor="text">InFile1</label>
+              <input id="infile1" type="text" name="infile1" />
+            </p>
+          </div>
+          <p className={styles.actions}>
+            <CaseFormSubmit />
+          </p>
+        </form>
+      </main>
+    </>
   );
 }

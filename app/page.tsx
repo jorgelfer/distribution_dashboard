@@ -52,7 +52,9 @@ export default function Home() {
 
   return (
     <>
-      <main>{/* <Login /> */}</main>
+      <main>
+        <Login />
+      </main>
     </>
   );
 }
