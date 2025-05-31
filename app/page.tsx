@@ -16,11 +16,6 @@ export default function Home() {
         <p>
           <Link href="/about">About us</Link>
         </p>
-        <p>
-          <Link href="/meals">Meals</Link>
-          <Link href="/meals/share">Share Meals</Link>
-          <Link href="/community">Community</Link>
-        </p>
         <TodosContextProvider>
           <NewTodo />
           <Todos />
