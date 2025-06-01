@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <>
       <main>
-        <Login />
+        <Login values={enteredCase} onEnteredValues={handleInputChange} />
       </main>
     </>
   );
