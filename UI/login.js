@@ -6,7 +6,6 @@ import { getDSS } from "@/lib/actions";
 import { infile1_map } from "@/models/case";
 
 export default function Login({ values, onEnteredValues }) {
-  console.log(values);
   return (
     <>
       <header className={styles.header}>

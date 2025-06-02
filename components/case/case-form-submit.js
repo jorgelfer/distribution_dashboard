@@ -6,7 +6,7 @@ export default function CaseFormSubmit() {
   const { pending } = useFormStatus();
   return (
     <button disabled={pending} type="submit">
-      {pending ? "Submitting..." : "Run"}
+      {pending ? "Running..." : "Run DSS"}
     </button>
   );
 }
