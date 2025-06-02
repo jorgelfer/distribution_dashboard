@@ -8,7 +8,7 @@ import Link from "next/link";
 // import TodosContextProvider from "@/store/todos-context";
 import Case from "@/models/case";
 import { infile1_map } from "@/models/case";
-import Login from "@/UI/login";
+import Login from "@/UI/login/login";
 import { useState } from "react";
 
 export default function Home() {

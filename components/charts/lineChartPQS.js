@@ -1,11 +1,11 @@
 import { useState } from "react";
 import * as d3 from "d3";
 
-import ChartContainer from "../ChartComponents/ChartContainer";
-import Buttons from "../Interactions/Buttons";
-import Card from "../UI/Card/Card";
-import Curve from "../ChartComponents/Curve";
-import Axis from "../ChartComponents/Axis";
+import ChartContainer from "../chartComponents/chartContainer";
+import Buttons from "@/interactions/buttons";
+import Card from "@/UI/card/card";
+import Curve from "../chartComponents/curve";
+import Axis from "../chartComponents/axis";
 
 const powers = [
   { id: "p", label: "Active" },

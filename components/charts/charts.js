@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
 import * as d3 from "d3";
-import Header from "../UI/Header/Header";
+import Header from "@/UI/header/header";
 import LineChartVM from "./lineChartVM";
 import LineChartPQS from "./lineChartPQS";
 import LineChartBSS from "./lineChartBSS";
 import NetworkGraph from "./networkGraph";
-import { updateData } from "../Data/update";
+import { updateData } from "@/data/update";
 
 export default function Charts(props) {
   const margin = { top: 30, right: 30, bottom: 50, left: 70 };

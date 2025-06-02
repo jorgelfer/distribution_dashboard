@@ -1,10 +1,10 @@
 // import { useRef, useEffect } from 'react';
-import * as d3 from 'd3';
+import * as d3 from "d3";
 
-import ChartContainer from '../ChartComponents/ChartContainer';
-import Card from '../UI/Card/Card';
-import Curve from '../ChartComponents/Curve';
-import Axis from '../ChartComponents/Axis';
+import ChartContainer from "../chartComponents/chartContainer";
+import Card from "@/UI/card/card";
+import Curve from "../chartComponents/curve";
+import Axis from "../chartComponents/axis";
 
 export default function LineChartVM(props) {
   const width = 400;
@@ -13,22 +13,24 @@ export default function LineChartVM(props) {
   const innerHeight = height - props.margin.top - props.margin.bottom;
 
   // group data
-  const sumstat = d3.group(props.data.flat(), d => d.uid);
+  const sumstat = d3.group(props.data.flat(), (d) => d.uid);
 
   // get array of uids
   var uids = Array.from(sumstat.keys()); // list of group names
 
-  // scales 
-  const xScale = d3.scaleTime()   
-    .domain(d3.extent(props.time, d => props.dateParser(d)))   
+  // scales
+  const xScale = d3
+    .scaleTime()
+    .domain(d3.extent(props.time, (d) => props.dateParser(d)))
     .range([0, innerWidth]);
 
-  const formatTime = d3.timeFormat("%H")
-  const yScale = d3.scaleLinear()
+  const formatTime = d3.timeFormat("%H");
+  const yScale = d3
+    .scaleLinear()
     .domain(props.y_extent)
     .range([innerHeight, 0]);
 
-  return(
+  return (
     <Card>
       <h2>Voltage Magnitude</h2>
       <ChartContainer
@@ -37,7 +39,7 @@ export default function LineChartVM(props) {
         margin={props.margin}
         className="line-chart"
       >
-        <Axis 
+        <Axis
           type="time"
           time={props.time}
           dateParser={props.dateParser}
@@ -47,7 +49,7 @@ export default function LineChartVM(props) {
           innerHeight={innerHeight}
           label={"Time [h]"}
         />
-        <Axis 
+        <Axis
           type="left"
           scale={yScale}
           innerWidth={innerWidth}
@@ -67,7 +69,7 @@ export default function LineChartVM(props) {
             />
           </g>
         ))}
-      </ChartContainer> 
+      </ChartContainer>
     </Card>
   );
 }

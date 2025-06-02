@@ -1,18 +1,18 @@
 import { useState, useCallback, useEffect } from "react";
 import * as d3 from "d3";
 
-import Card from "../UI/Card/Card";
-import ChartContainer from "../ChartComponents/ChartContainer";
-import Buttons from "../Interactions/Buttons";
+import Card from "@/UI/card/card";
+import ChartContainer from "../chartComponents/chartContainer";
+import Buttons from "@/interactions/buttons";
 
-import NodeBreaker from "./Network/NodeBreaker";
-import Net from "./Network/Net";
-import ForceGraph from "./Network/ForceGraph";
+import NodeBreaker from "./network/nodeBreaker";
+import Net from "./network/net";
+import ForceGraph from "./network/forceGraph";
 
-import GeojsonMap from "./Mapping/GeojsonMap";
-import bronx from "./Mapping/bronx.json";
+import GeojsonMap from "./mapping/GeojsonMap";
+import bronx from "./mapping/bronx.json";
 
-import Form from "../UI/Device/Form";
+import Form from "@/UI/device/form";
 
 const layers = [
   { id: "react", label: "React.js" },
