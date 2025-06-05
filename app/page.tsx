@@ -1,11 +1,5 @@
 "use client";
 
-import styles from "./page.module.css";
-import Link from "next/link";
-// import Header from "@/components/header";
-// import Todos from "@/components/todos";
-// import NewTodo from "@/components/newTodo";
-// import TodosContextProvider from "@/store/todos-context";
 import Case from "@/models/case";
 import { infile1_map } from "@/models/case";
 import Login from "@/UI/login/login";
