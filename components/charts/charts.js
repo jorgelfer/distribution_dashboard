@@ -49,7 +49,6 @@ export default function Charts(props) {
   return (
     <>
       <Header handleClick={handleClick} selectedValue={selectedValue} />
-      <h1 className="main-title">Distribution System Dashboard</h1>
       <div className="row">
         <div className="col-9">
           <NetworkGraph

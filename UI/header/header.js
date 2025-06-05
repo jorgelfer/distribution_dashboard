@@ -1,18 +1,25 @@
-import "./header.css";
+import styles from "./header.module.css";
 import { DATADISPLAY } from "./data.js";
+import Image from "next/image";
 
 export default function Header({ handleClick, selectedValue }) {
   function DataDisplay({ children, isSelected, ...props }) {
     return (
-      <li className={isSelected ? "main-tab active" : "main-tab"} {...props}>
-        <img src={children.image} alt={children.title} />
+      <li
+        className={styles[isSelected ? "main-tab" : "main-tab"]}
+        // className={styles["main-tab"]}
+        {...props}
+      >
+        {/* <div className={styles.slideshow}> */}
+        <Image src={children.image} alt={children.title} />
         <p>{children.title}</p>
+        {/* </div> */}
       </li>
     );
   }
 
   return (
-    <div id="main-header">
+    <div className={styles["main-header"]}>
       <ul>
         {Object.keys(DATADISPLAY).map((objKey) => (
           <DataDisplay

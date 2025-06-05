@@ -5,7 +5,7 @@ import { fetchOpenDSSData } from "./https";
 import ShowScheduling from "./ShowScheduling";
 
 import { useState } from "react";
-import Buttons from "../Interactions/Buttons";
+import Buttons from "../interactions/buttons";
 
 const solve_layers = [
   { id: "opendss_qsts", label: "OpenDSS QSTS" },
