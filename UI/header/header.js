@@ -6,11 +6,15 @@ export default function Header({ handleClick, selectedValue }) {
   function DataDisplay({ children, isSelected, ...props }) {
     return (
       <li
-        className={styles[isSelected ? "main-tab" : "main-tab"]}
+        className={
+          isSelected
+            ? styles["main-tab"] + " " + styles.active
+            : styles["main-tab"]
+        }
         // className={styles["main-tab"]}
         {...props}
       >
-        {/* <div className={styles.slideshow}> */}
+        {/* <div className=> */}
         <Image src={children.image} alt={children.title} />
         <p>{children.title}</p>
         {/* </div> */}
