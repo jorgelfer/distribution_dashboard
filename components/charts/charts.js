@@ -71,50 +71,44 @@ export default function Charts(props) {
           )}
         </div>
         <div className="col-3">
-          <div className="row">
-            <div className="col-12">
-              <LineChartVM
-                margin={margin}
-                data={vdata}
-                y_extent={vextent}
-                colorScale={colorScale}
-                time={props.data["time"]}
-                dateParser={dateParser}
-                selectedValue={selectedValue}
-              />
-            </div>
-            <div className="col-12">
-              {["battery"].includes(selectedValue) && (
-                <LineChartBSS
-                  margin={margin}
-                  data={data}
-                  y_extent={y_extent}
-                  colorScale={colorScale}
-                  time={props.data["time"]}
-                  dateParser={dateParser}
-                  selectedValue={selectedValue}
-                />
-              )}
-              {[
-                "vsource",
-                "load",
-                "dr_load",
-                "flex_gen",
-                "flex_load",
-                "mismatch",
-              ].includes(selectedValue) && (
-                <LineChartPQS
-                  margin={margin}
-                  data={data}
-                  y_extent={y_extent}
-                  colorScale={colorScale}
-                  time={props.data["time"]}
-                  dateParser={dateParser}
-                  selectedValue={selectedValue}
-                />
-              )}
-            </div>
-          </div>
+          <LineChartVM
+            margin={margin}
+            data={vdata}
+            y_extent={vextent}
+            colorScale={colorScale}
+            time={props.data["time"]}
+            dateParser={dateParser}
+            selectedValue={selectedValue}
+          />
+          {["battery"].includes(selectedValue) && (
+            <LineChartBSS
+              margin={margin}
+              data={data}
+              y_extent={y_extent}
+              colorScale={colorScale}
+              time={props.data["time"]}
+              dateParser={dateParser}
+              selectedValue={selectedValue}
+            />
+          )}
+          {[
+            "vsource",
+            "load",
+            "dr_load",
+            "flex_gen",
+            "flex_load",
+            "mismatch",
+          ].includes(selectedValue) && (
+            <LineChartPQS
+              margin={margin}
+              data={data}
+              y_extent={y_extent}
+              colorScale={colorScale}
+              time={props.data["time"]}
+              dateParser={dateParser}
+              selectedValue={selectedValue}
+            />
+          )}
         </div>
       </div>
     </>

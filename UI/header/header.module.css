@@ -1,23 +1,20 @@
 .main-header {
-  background: none; /*linear-gradient(180deg, #0c4a70, #1a1d1d); */
-  height: 120px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
   width: 100%;
   display: block;
-  overflow-y: hidden;
   text-align: center;
   padding: 5px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .main-header > ul {
-  /* width: 100%; */
   margin: 0 auto;
 }
 
 .main-tab {
-  /* height: 100%; */
   width: 12.5%;
-  float: left;
   display: inline-block;
   vertical-align: top;
   cursor: pointer;

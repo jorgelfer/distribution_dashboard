@@ -11,30 +11,31 @@ export default function Header({ handleClick, selectedValue }) {
             ? styles["main-tab"] + " " + styles.active
             : styles["main-tab"]
         }
-        // className={styles["main-tab"]}
         {...props}
       >
-        {/* <div className=> */}
         <Image src={children.image} alt={children.title} />
         <p>{children.title}</p>
-        {/* </div> */}
       </li>
     );
   }
 
   return (
-    <div className={styles["main-header"]}>
-      <ul>
-        {Object.keys(DATADISPLAY).map((objKey) => (
-          <DataDisplay
-            key={objKey}
-            isSelected={selectedValue === objKey}
-            onClick={() => handleClick(objKey)}
-          >
-            {DATADISPLAY[objKey]}
-          </DataDisplay>
-        ))}
-      </ul>
+    <div className="row">
+      <div className="col-10">
+        <div className={styles["main-header"]}>
+          <ul>
+            {Object.keys(DATADISPLAY).map((objKey) => (
+              <DataDisplay
+                key={objKey}
+                isSelected={selectedValue === objKey}
+                onClick={() => handleClick(objKey)}
+              >
+                {DATADISPLAY[objKey]}
+              </DataDisplay>
+            ))}
+          </ul>
+        </div>
+      </div>
     </div>
   );
 }

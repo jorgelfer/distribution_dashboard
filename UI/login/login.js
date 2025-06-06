@@ -2,17 +2,24 @@ import React from "react";
 import styles from "./login.module.css";
 import CaseFormSubmit from "@/components/case/case-form-submit";
 import { getDSS } from "@/lib/actions";
-
 import { infile1_map } from "@/models/case";
 
 export default function Login({ values, onEnteredValues }) {
   return (
     <>
       <header className={styles.header}>
-        <h1>Case definition</h1>
+        <div className={styles.hero}>
+          <h1></h1>
+        </div>
       </header>
       <main className={styles.main}>
         <form className={styles.form} action={getDSS}>
+          <header className={styles.header}>
+            <div className={styles.hero}>
+              <h1>Case definition</h1>
+            </div>
+          </header>
+          {/* <h2>Case definition</h2> */}
           <div className={styles.row}>
             <p>
               <label htmlFor="dropdown">Network Model</label>

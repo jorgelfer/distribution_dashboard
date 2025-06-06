@@ -14,6 +14,22 @@ export default function MainHeader() {
           <Image src={logoImg} alt="A distribution network icon" priority />
           Distribution System Dashboard
         </Link>
+        <nav className={styles.nav}>
+          <ul>
+            <li>
+              <NavLink href="/">Case definition</NavLink>
+            </li>
+            <li>
+              <NavLink href="/opendss">OpenDSS</NavLink>
+            </li>
+            <li>
+              <NavLink href="/power_flow">FBS power flow</NavLink>
+            </li>
+            <li>
+              <NavLink href="/scheduling">Scheduling</NavLink>
+            </li>
+          </ul>
+        </nav>
       </header>
     </>
   );
