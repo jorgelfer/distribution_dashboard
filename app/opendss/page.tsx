@@ -5,7 +5,7 @@ import { Suspense } from "react";
 import ShowOpenDSS from "@/data/showOpenDSS";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
-export default function FetchingPage() {
+export default function OpenDSSPage() {
   const searchParams = useSearchParams();
   const networkModel = searchParams.get("network-model");
   const inFile1 = searchParams.get("infile1");

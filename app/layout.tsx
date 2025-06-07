@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import MainHeader from "@/components/main-header/main-header";
+import { CaseContext } from "@/store/case-data-context";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -27,8 +28,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <MainHeader />
-        {children}
+        <CaseContext.Provider>
+          <MainHeader />
+          {children}
+        </CaseContext.Provider>
       </body>
     </html>
   );

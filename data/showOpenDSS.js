@@ -2,25 +2,8 @@ import Charts from "@/components/charts/charts";
 import { fetchOpenDSSData } from "./https";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import Buttons from "@/interactions/buttons";
-import { useState } from "react";
-
-const solve_layers = [
-  { id: "opendss_qsts", label: "OpenDSS QSTS" },
-  { id: "fbs_qsts", label: "FBS QSTS" },
-  { id: "energy_scheduling", label: "Energy Scheduling" },
-];
 
 export default function ShowOpenDSS({ networkModel, inFile1 }) {
-  // active layer
-  const [activeLayer, setActiveLayer] = useState("opendss_qsts");
-
-  // handle layer selection
-  function layerSelectionHandler(id) {
-    if (activeLayer !== id) {
-      setActiveLayer(id);
-    }
-  }
-
   // OpenDSS data
   const qstsURL = `http://127.0.0.1:5000/qsts/${networkModel}/${inFile1}`;
   const { data } = useSuspenseQuery({
@@ -40,24 +23,5 @@ export default function ShowOpenDSS({ networkModel, inFile1 }) {
     );
   }
 
-  return (
-    <>
-      {/* {activeLayer === "opendss_qsts" ? (
-        content
-      ) : (
-        <ShowScheduling
-          networkModel={networkModel}
-          inFile1={inFile1}
-          openDSSData={data}
-          activeLayer={activeLayer}
-        />
-      )} */}
-      {content}
-      <Buttons
-        buttons={solve_layers}
-        activeButton={activeLayer}
-        onButtonSelection={layerSelectionHandler}
-      />
-    </>
-  );
+  return content;
 }

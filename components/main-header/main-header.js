@@ -17,9 +17,6 @@ export default function MainHeader() {
         <nav className={styles.nav}>
           <ul>
             <li>
-              <NavLink href="/">Case definition</NavLink>
-            </li>
-            <li>
               <NavLink href="/opendss">OpenDSS</NavLink>
             </li>
             <li>
