@@ -1,12 +1,12 @@
 "use client";
 
 import { Suspense } from "react";
-import ShowScheduling from "./showScheduling";
+import ShowPowerFlow from "./showPowerFlow";
 
 const SchedulingPage: React.FC = () => {
   return (
     <Suspense fallback={<p>Loading...</p>}>
-      <ShowScheduling />
+      <ShowPowerFlow />
     </Suspense>
   );
 };
