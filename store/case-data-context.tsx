@@ -6,14 +6,12 @@ import Case from "@/models/case";
 type CaseContextObj = {
   case: Case;
   changeCase: (inputCase: Case) => void;
-  opendssData: object;
 };
 
 // createContext returns a React component.
 export const CaseContext = React.createContext<CaseContextObj>({
   case: new Case("13Bus"),
   changeCase: () => {},
-  opendssData: {},
 });
 
 const CaseContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -28,7 +26,6 @@ const CaseContextProvider: React.FC<{ children: React.ReactNode }> = (
   const contextValue: CaseContextObj = {
     case: enteredCase,
     changeCase: handleCaseChange,
-    opendssData: {},
   };
 
   return (

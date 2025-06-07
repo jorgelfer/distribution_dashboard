@@ -1,24 +1,19 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
-import ShowOpenDSS from "@/data/showOpenDSS";
+import ShowScheduling from "./showScheduling";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 
-export default function SchedulingPage() {
-  const searchParams = useSearchParams();
-  const networkModel = searchParams.get("network-model");
-  const inFile1 = searchParams.get("infile1");
-
-  console.log(networkModel, inFile1);
-
+const SchedulingPage: React.FC = () => {
   const queryClient = new QueryClient();
 
   return (
     <Suspense fallback={<p>Loading...</p>}>
       <QueryClientProvider client={queryClient}>
-        <ShowOpenDSS networkModel={networkModel} inFile1={inFile1} />
+        <ShowScheduling />
       </QueryClientProvider>
     </Suspense>
   );
-}
+};
+
+export default SchedulingPage;

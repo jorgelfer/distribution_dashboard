@@ -1,15 +1,21 @@
+import { useContext } from "react";
 import Charts from "@/components/charts/charts";
-import { fetchOpenDSSData } from "./https";
+import { fetchOpenDSSData } from "../../data/https";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import Buttons from "@/interactions/buttons";
+import { CaseContext } from "@/store/case-data-context";
 
-export default function ShowOpenDSS({ networkModel, inFile1 }) {
+const ShowOpenDSS: React.FC = () => {
+  // get context
+  const caseCtx = useContext(CaseContext);
+  const networkModel = caseCtx.case.networkModel;
+  const inFile1 = caseCtx.case.inFile1;
+
   // OpenDSS data
   const qstsURL = `http://127.0.0.1:5000/qsts/${networkModel}/${inFile1}`;
   const { data } = useSuspenseQuery({
-    queryKey: ["qstsData", networkModel, inFile1],
+    queryKey: ["opendss", networkModel, inFile1],
     queryFn: () => fetchOpenDSSData(qstsURL),
-    staleTime: 1000 * 60 * 5, // 5 minutes
+    staleTime: Infinity, // 5 minutes
   });
 
   let content;
@@ -24,4 +30,6 @@ export default function ShowOpenDSS({ networkModel, inFile1 }) {
   }
 
   return content;
-}
+};
+
+export default ShowOpenDSS;
