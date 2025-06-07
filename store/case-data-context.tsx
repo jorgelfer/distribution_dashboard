@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
-import { infile1_map } from "@/models/case";
+"use client";
+
+import React, { useState } from "react";
 import Case from "@/models/case";
 
 type CaseContextObj = {
   case: Case;
-  changeCase: (identifier: string, value: string) => void;
+  changeCase: (inputCase: Case) => void;
   opendssData: object;
 };
 
@@ -20,19 +21,8 @@ const CaseContextProvider: React.FC<{ children: React.ReactNode }> = (
 ) => {
   const [enteredCase, setEnteredCase] = useState<Case>(new Case("13Bus"));
 
-  const handleCaseChange = (identifier: string, value: string) => {
-    setEnteredCase((prevCase) => ({
-      ...prevCase,
-      [identifier]: value,
-    }));
-
-    // By default change inFile1 based on networkModel
-    if (identifier === "networkModel") {
-      setEnteredCase((prevCase) => ({
-        ...prevCase,
-        inFile1: infile1_map[value],
-      }));
-    }
+  const handleCaseChange = (inputCase: Case) => {
+    setEnteredCase(inputCase);
   };
 
   const contextValue: CaseContextObj = {
