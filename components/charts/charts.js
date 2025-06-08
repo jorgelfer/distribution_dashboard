@@ -5,7 +5,7 @@ import Header from "@/UI/header/header";
 import LineChartVM from "./lineChartVM";
 import LineChartPQS from "./lineChartPQS";
 import LineChartBSS from "./lineChartBSS";
-import NetworkGraph from "./networkGraph";
+import NetworkGraph from "./network-graph";
 import { updateData } from "@/data/update";
 
 export default function Charts(props) {
@@ -60,13 +60,8 @@ export default function Charts(props) {
             nodeSize={props.nodeSize}
           />
           {selectedBuses.buses.length > 0 && (
-            <p className="form-actions">
-              <button
-                className="login-button"
-                onClick={() => handleSelectBus([])}
-              >
-                Release
-              </button>
+            <p className="actions">
+              <button onClick={() => handleSelectBus([])}>Release</button>
             </p>
           )}
         </div>

@@ -73,7 +73,7 @@ const Login: React.FC = () => {
               />
             </p>
           </div>
-          <p className={styles.actions}>
+          <p className="actions">
             <CaseFormSubmit />
           </p>
         </form>
