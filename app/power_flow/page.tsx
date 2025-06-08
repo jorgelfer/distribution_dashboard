@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import ShowPowerFlow from "./showPowerFlow";
+import ShowPowerFlow from "./show-power-flow";
 
 const SchedulingPage: React.FC = () => {
   return (

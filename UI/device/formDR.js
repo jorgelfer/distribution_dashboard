@@ -105,8 +105,8 @@ export default function DRloadForm({
           ))}
         </fieldset>
 
-        <p className={classes["form-actions"]}>
-          <button className={classes["button"]}>Submit</button>
+        <p className="actions">
+          <button>Submit</button>
         </p>
       </form>
     </>

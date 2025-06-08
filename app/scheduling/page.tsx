@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense } from "react";
-import ShowScheduling from "./showScheduling";
+import ShowScheduling from "./show-scheduling";
 
 const SchedulingPage: React.FC = () => {
   return (
