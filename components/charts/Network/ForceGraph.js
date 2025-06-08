@@ -7,6 +7,7 @@ import InitDevice from "./initDevice";
 
 import ActionIcons from "@/interactions/actionIcons";
 import { useEffect, useRef } from "react";
+// import Image from "next/image";
 
 export default function ForceGraph(props) {
   let actions = [
@@ -204,7 +205,7 @@ export default function ForceGraph(props) {
           opacity={props.selectedAction === action.value ? 1 : 0.6}
           heigth={25}
           width={25}
-          href={ActionIcons(action.value)}
+          href={ActionIcons(action.value).src}
           onClick={() => props.onSelectedAction(action.value)}
         ></image>
       ))}
@@ -239,7 +240,7 @@ export default function ForceGraph(props) {
           <image
             x={props.xScale(d.x)}
             y={props.yScale(d.y)}
-            className="symbol"
+            // className="symbol"
             id={d.uid}
             transform="translate(5,5)"
             display={
@@ -250,7 +251,7 @@ export default function ForceGraph(props) {
             }
             heigth={25}
             width={25}
-            href={Symbol(props.selectedValue)}
+            href={Symbol(props.selectedValue).src}
             onClick={device_click}
           ></image>
         </g>

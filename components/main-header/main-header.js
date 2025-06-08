@@ -1,3 +1,5 @@
+"use client";
+
 import logoImg from "@/assets/icons/logo.png";
 import Link from "next/link";
 import styles from "./main-header.module.css";
