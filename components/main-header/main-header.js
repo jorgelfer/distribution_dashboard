@@ -17,7 +17,7 @@ export default function MainHeader() {
 
   const dialog = useRef();
   function handleConfigClick() {
-    dialog.current.showModal();
+    dialog.current.open();
   }
 
   return (
