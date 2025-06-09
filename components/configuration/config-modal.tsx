@@ -1,9 +1,11 @@
-// import { usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import styles from "./config-modal.module.css";
 
 import React, { useImperativeHandle, forwardRef, useRef } from "react";
+import SchedulingConfig from "./scheduling-config";
 interface ChildHandle {
   open: () => void;
+  close: () => void;
 }
 
 interface ChildProps {}
@@ -13,19 +15,27 @@ const ConfigModal = forwardRef<ChildHandle, ChildProps>((props, ref) => {
 
   useImperativeHandle(ref, () => ({
     open: () => {
-      // Perform some action within the child
       dialog.current?.showModal();
+    },
+    close: () => {
+      dialog.current?.close();
     },
   }));
 
-  // const path = usePathname();
-  // console.log(path);
+  function handleDialogClose() {
+    dialog.current?.close();
+  }
+
+  const path = usePathname();
   return (
     <dialog ref={dialog} className={styles["config-modal"]}>
-      <h2>Your won</h2>
-      <form method="dialog">
-        <button>Close</button>
-      </form>
+      {path.startsWith("/scheduling") ? (
+        <SchedulingConfig onCloseDialog={handleDialogClose} />
+      ) : (
+        <form method="dialog">
+          <button>Close</button>
+        </form>
+      )}
     </dialog>
   );
 });
