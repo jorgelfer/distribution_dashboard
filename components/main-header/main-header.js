@@ -35,7 +35,7 @@ export default function MainHeader() {
               <NavLink href="/opendss">OpenDSS</NavLink>
             </li>
             <li>
-              <NavLink href="/power_flow">FBS power flow</NavLink>
+              <NavLink href="/power-flow">FBS power flow</NavLink>
             </li>
             <li>
               <NavLink href="/scheduling">Scheduling</NavLink>

@@ -3,6 +3,7 @@ import styles from "./config-modal.module.css";
 
 import React, { useImperativeHandle, forwardRef, useRef } from "react";
 import SchedulingConfig from "./scheduling-config";
+import PowerFlowConfig from "./power-flow-config";
 interface ChildHandle {
   open: () => void;
   close: () => void;
@@ -29,12 +30,11 @@ const ConfigModal = forwardRef<ChildHandle, ChildProps>((props, ref) => {
   const path = usePathname();
   return (
     <dialog ref={dialog} className={styles["config-modal"]}>
-      {path.startsWith("/scheduling") ? (
+      {path.startsWith("/scheduling") && (
         <SchedulingConfig onCloseDialog={handleDialogClose} />
-      ) : (
-        <form method="dialog">
-          <button className="button-flat">Close</button>
-        </form>
+      )}
+      {path.startsWith("/power-flow") && (
+        <PowerFlowConfig onCloseDialog={handleDialogClose} />
       )}
     </dialog>
   );
