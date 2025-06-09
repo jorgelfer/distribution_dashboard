@@ -13,6 +13,10 @@ export default function DRloadForm({
     onSubmitted(device, false);
   }
 
+  function handleRemove() {
+    onSelected(null);
+    onSubmitted(device, false);
+  }
   return (
     <>
       <form className={classes.simple} onSubmit={handleSubmit}>
@@ -106,7 +110,10 @@ export default function DRloadForm({
         </fieldset>
 
         <p className="actions">
-          <button>Submit</button>
+          <button type="button" className="button-flat" onClick={handleRemove}>
+            Remove
+          </button>
+          <button className="submit-button">Submit</button>
         </p>
       </form>
     </>

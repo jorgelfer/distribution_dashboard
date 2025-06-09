@@ -33,7 +33,7 @@ const ConfigModal = forwardRef<ChildHandle, ChildProps>((props, ref) => {
         <SchedulingConfig onCloseDialog={handleDialogClose} />
       ) : (
         <form method="dialog">
-          <button>Close</button>
+          <button className="button-flat">Close</button>
         </form>
       )}
     </dialog>

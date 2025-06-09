@@ -71,16 +71,10 @@ const SchedulingConfig: React.FC<ChildProps> = ({ onCloseDialog }) => {
       </div>
 
       <p className="actions">
-        {/* <div> */}
-        <button
-          type="button"
-          className={styles["button-flat"]}
-          onClick={onCloseDialog}
-        >
+        <button type="button" className="button-flat" onClick={onCloseDialog}>
           Close
         </button>
-        {/* </div> */}
-        <button>Submit</button>
+        <button className="submit-button">Submit</button>
       </p>
     </form>
   );

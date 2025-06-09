@@ -131,10 +131,12 @@ body {
 }
 
 .actions {
-  text-align: right;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }
 
-.actions button {
+.submit-button {
   border: 0;
   padding: 0.5rem 0.5rem;
   background: linear-gradient(90deg, #f9572a, #ff9b05);
@@ -147,15 +149,32 @@ body {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.actions button:hover,
-.actions button:focus {
+.submit-button:hover,
+.submit-button:focus {
   background: linear-gradient(90deg, #fd4715, #f9b241);
 }
 
-.actions button:disabled,
-.actions button:hover:disabled,
-.actions button:focus:disabled {
+.submit-button:disabled,
+.submit-button:hover:disabled,
+.submit-button:focus:disabled {
   background: #ccc;
   color: #979797;
   cursor: not-allowed;
+}
+
+.button-flat {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #1a1d1d;
+  color: #ddd6cb;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.button-flat:hover,
+.button-flat:focus {
+  background-color: transparent;
+  color: #ffc905;
 }

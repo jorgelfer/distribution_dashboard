@@ -13,6 +13,11 @@ export default function UnitForm({
     onSubmitted(device, false);
   }
 
+  function handleRemove() {
+    onSelected(null);
+    onSubmitted(device, true);
+  }
+
   return (
     <>
       <form className={classes.simple} onSubmit={handleSubmit}>
@@ -106,7 +111,10 @@ export default function UnitForm({
         </fieldset>
 
         <p className="actions">
-          <button>Submit</button>
+          <button type="button" className="button-flat" onClick={handleRemove}>
+            Remove
+          </button>
+          <button className="submit-button">Submit</button>
         </p>
       </form>
     </>

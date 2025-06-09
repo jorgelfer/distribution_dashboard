@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import styles from "./login.module.css";
 import { infile1_map } from "@/models/case";
@@ -32,6 +32,10 @@ const Login: React.FC = () => {
 
     router.push("/opendss");
   };
+
+  useEffect(() => {
+    caseCtx.changeEnabled(false);
+  }, []);
 
   return (
     <>

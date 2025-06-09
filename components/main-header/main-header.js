@@ -43,7 +43,11 @@ export default function MainHeader() {
           </ul>
         </nav>
         <p className="actions">
-          <button disabled={!isEnabled} onClick={handleConfigClick}>
+          <button
+            className="submit-button"
+            disabled={!isEnabled}
+            onClick={handleConfigClick}
+          >
             Configuration
           </button>
         </p>

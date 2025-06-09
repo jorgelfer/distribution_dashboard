@@ -2,7 +2,7 @@
   border: none;
   border-radius: 8px;
   padding: 2rem;
-  background-color: #d7fcf8;
+  background-color: #8f3a09;
 }
 
 .config-modal[open] {
@@ -35,25 +35,6 @@
 .config-modal p strong {
   color: #10655b;
 }
-
-.config-modal form {
-  text-align: right;
-}
-
-/* .config-modal button {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  background: #12352f;
-  color: #edfcfa;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.config-modal button:hover {
-  background: #051715;
-} */
 
 @keyframes slide-in-from-top {
   0% {

@@ -21,7 +21,8 @@ const ShowScheduling: React.FC = () => {
   });
 
   // energy scheduling call
-  opendssData["kVA_base"] = kVA_base;
+  opendssData["kVA_base"] =
+    typeof kVA_base !== "number" ? parseFloat(kVA_base) : kVA_base;
   opendssData["formulation"] = formulation;
 
   // get scheduling data

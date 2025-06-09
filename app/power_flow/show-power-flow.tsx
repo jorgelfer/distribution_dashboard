@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Charts from "@/components/charts/charts";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { CaseContext } from "@/store/case-data-context";
@@ -9,6 +9,7 @@ const ShowPowerFlow: React.FC = () => {
   const caseCtx = useContext(CaseContext);
   const networkModel = caseCtx.case.networkModel;
   const inFile1 = caseCtx.case.inFile1;
+  const kVA_base = caseCtx.config.kVA_base;
 
   // get OpenDSS using tanstack query cache
   const qstsURL = `http://127.0.0.1:5000/qsts/${networkModel}/${inFile1}`;
@@ -18,22 +19,14 @@ const ShowPowerFlow: React.FC = () => {
     staleTime: Infinity, // 5 minutes
   });
 
-  // handle change in configuration
-  const [enteredConf, setEnteredConf] = useState({
-    formulation: "fbs",
-    kVA_base: 100.0,
-  });
-
   // energy scheduling call
   opendssData["kVA_base"] =
-    typeof enteredConf.kVA_base === "string"
-      ? parseFloat(enteredConf.kVA_base)
-      : enteredConf.kVA_base;
-  opendssData["formulation"] = enteredConf.formulation;
+    typeof kVA_base !== "number" ? parseFloat(kVA_base) : kVA_base;
+  opendssData["formulation"] = "fbs";
 
   // get scheduling data
   let { data } = useSuspenseQuery({
-    queryKey: ["power_flow", networkModel, inFile1],
+    queryKey: ["power_flow", networkModel, inFile1, kVA_base],
     queryFn: () => fetchFBSData(opendssData),
     staleTime: Infinity, // 5 minutes
   });
@@ -48,6 +41,11 @@ const ShowPowerFlow: React.FC = () => {
       />
     );
   }
+
+  // update config button
+  useEffect(() => {
+    caseCtx.changeEnabled(true);
+  }, []);
 
   return content;
 };
