@@ -6,16 +6,23 @@ import styles from "./main-header.module.css";
 import Image from "next/image";
 import MainHeaderBackground from "./main-header-background";
 import NavLink from "./nav-link";
-import { useContext } from "react";
+import { useContext, useRef, useState } from "react";
 import { CaseContext } from "@/store/case-data-context";
+import ConfigModal from "../configuration/config-modal";
 
 export default function MainHeader() {
   // get context
   const caseCtx = useContext(CaseContext);
   const isEnabled = caseCtx.enabled;
 
+  const dialog = useRef();
+  function handleConfigClick() {
+    dialog.current.showModal();
+  }
+
   return (
     <>
+      <ConfigModal ref={dialog} />
       <MainHeaderBackground />
       <header className={styles.header}>
         <Link className={styles.logo} href="/">
@@ -36,7 +43,9 @@ export default function MainHeader() {
           </ul>
         </nav>
         <p className="actions">
-          <button disabled={!isEnabled}> Configuration</button>
+          <button disabled={!isEnabled} onClick={handleConfigClick}>
+            Configuration
+          </button>
         </p>
       </header>
     </>
