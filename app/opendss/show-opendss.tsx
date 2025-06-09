@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import Charts from "@/components/charts/charts";
 import { fetchOpenDSSData } from "../../data/https";
 import { useSuspenseQuery } from "@tanstack/react-query";
@@ -28,6 +28,11 @@ const ShowOpenDSS: React.FC = () => {
       />
     );
   }
+
+  // update config button
+  useEffect(() => {
+    caseCtx.changeEnabled(false);
+  }, []);
 
   return content;
 };

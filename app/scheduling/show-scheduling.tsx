@@ -1,10 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
 import Charts from "@/components/charts/charts";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { CaseContext } from "@/store/case-data-context";
 import { fetchOpenDSSData, fetchSchedulingData } from "../../data/https";
-import Collapsible from "@/UI/collapsible/collapsible";
-import SchedulingConfig from "./scheduling-config";
 
 const ShowScheduling: React.FC = () => {
   // get context
@@ -44,15 +42,13 @@ const ShowScheduling: React.FC = () => {
     );
   }
 
+  // update config button
+  useEffect(() => {
+    caseCtx.changeEnabled(true);
+  }, []);
+
   // return content;
-  return (
-    <>
-      {content}
-      <Collapsible open={false} title="Configuration">
-        <SchedulingConfig />
-      </Collapsible>
-    </>
-  );
+  return content;
 };
 
 export default ShowScheduling;

@@ -237,23 +237,25 @@ export default function ForceGraph(props) {
             fill={props.colorScale(d.phases.length)}
             onClick={props.selectedAction === "cursor" ? node_click : null}
           />
-          <image
-            x={props.xScale(d.x)}
-            y={props.yScale(d.y)}
-            // className="symbol"
-            id={d.uid}
-            transform="translate(5,5)"
-            display={
-              active_nodes.includes(d.uid) ||
-              (active_nodes.includes(d.uid) && showSymbol)
-                ? "block"
-                : "none"
-            }
-            heigth={25}
-            width={25}
-            href={Symbol(props.selectedValue).src}
-            onClick={device_click}
-          ></image>
+          {active_nodes.includes(d.uid) && (
+            <image
+              x={props.xScale(d.x)}
+              y={props.yScale(d.y)}
+              // className="symbol"
+              id={d.uid}
+              transform="translate(5,5)"
+              display={
+                active_nodes.includes(d.uid) ||
+                (active_nodes.includes(d.uid) && showSymbol)
+                  ? "block"
+                  : "none"
+              }
+              heigth={25}
+              width={25}
+              href={Symbol(props.selectedValue).src}
+              onClick={device_click}
+            />
+          )}
         </g>
       ))}
       {props.selectedAction === "brush" && (

@@ -2,7 +2,7 @@
 
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
-// import styles from "./Configuration.module.css";
+import styles from "./scheduling-config.module.css";
 import { CaseContext } from "@/store/case-data-context";
 import Config from "@/models/config";
 
@@ -35,36 +35,44 @@ const SchedulingConfig: React.FC = () => {
   };
 
   return (
-    <div>
-      <p>
-        <label htmlFor="dropdown">Optimization Formulation</label>
-        <select
-          id="formulation"
-          value={enteredConfig.formulation}
-          onChange={(event) =>
-            handleInputChange("formulation", event.target.value)
-          }
-        >
-          {formulations.map((form) => (
-            <option key={form.value} value={form.value}>
-              {form.label}
-            </option>
-          ))}
-        </select>
-      </p>
-      <p>
-        <label htmlFor="number">kVA_base</label>
-        <input
-          id="kVA_base"
-          type="number"
-          name="kVA_base"
-          onChange={(event) =>
-            handleInputChange("kVA_base", event.target.value)
-          }
-          value={enteredConfig.kVA_base}
-        />
-      </p>
-    </div>
+    <>
+      <form className={styles.form} onSubmit={submitHandle}>
+        <div>
+          <p>
+            <label htmlFor="dropdown">Optimization Formulation</label>
+            <select
+              id="formulation"
+              value={enteredConfig.formulation}
+              onChange={(event) =>
+                handleInputChange("formulation", event.target.value)
+              }
+            >
+              {formulations.map((form) => (
+                <option key={form.value} value={form.value}>
+                  {form.label}
+                </option>
+              ))}
+            </select>
+          </p>
+          <p>
+            <label htmlFor="number">kVA_base</label>
+            <input
+              id="kVA_base"
+              type="number"
+              name="kVA_base"
+              onChange={(event) =>
+                handleInputChange("kVA_base", event.target.value)
+              }
+              value={enteredConfig.kVA_base}
+            />
+          </p>
+        </div>
+
+        <p className="actions">
+          <button>Submit</button>
+        </p>
+      </form>
+    </>
   );
 };
 

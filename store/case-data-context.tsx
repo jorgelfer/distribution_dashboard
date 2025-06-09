@@ -9,6 +9,8 @@ type CaseContextObj = {
   changeCase: (inputCase: Case) => void;
   config: Config;
   changeConfig: (inputConfig: Config) => void;
+  enabled: boolean;
+  changeEnabled: (enabled: boolean) => void;
 };
 
 // createContext returns a React component.
@@ -17,6 +19,8 @@ export const CaseContext = React.createContext<CaseContextObj>({
   changeCase: () => {},
   config: new Config("fbs", 100),
   changeConfig: () => {},
+  enabled: false,
+  changeEnabled: () => {},
 });
 
 const CaseContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -36,11 +40,19 @@ const CaseContextProvider: React.FC<{ children: React.ReactNode }> = (
     setEnteredConfig(inputConfig);
   };
 
+  const [isEnabled, setIsEnabled] = useState(false);
+
+  const handleIsEnabled = (enabled: boolean) => {
+    setIsEnabled(enabled);
+  };
+
   const contextValue: CaseContextObj = {
     case: enteredCase,
     changeCase: handleCaseChange,
     config: enteredConfig,
     changeConfig: handleConfigChange,
+    enabled: isEnabled,
+    changeEnabled: handleIsEnabled,
   };
 
   return (

@@ -6,8 +6,14 @@ import styles from "./main-header.module.css";
 import Image from "next/image";
 import MainHeaderBackground from "./main-header-background";
 import NavLink from "./nav-link";
+import { useContext } from "react";
+import { CaseContext } from "@/store/case-data-context";
 
 export default function MainHeader() {
+  // get context
+  const caseCtx = useContext(CaseContext);
+  const isEnabled = caseCtx.enabled;
+
   return (
     <>
       <MainHeaderBackground />
@@ -29,6 +35,9 @@ export default function MainHeader() {
             </li>
           </ul>
         </nav>
+        <p className="actions">
+          <button disabled={!isEnabled}> Configuration</button>
+        </p>
       </header>
     </>
   );
