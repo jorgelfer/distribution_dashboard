@@ -39,7 +39,13 @@ const SchedulingConfig: React.FC<ChildProps> = ({ onCloseDialog }) => {
 
   return (
     <form className={styles.form} onSubmit={submitHandle}>
-      <div>
+      <header className={styles.header}>
+        <div className={styles.hero}>
+          <h2>Scheduling Configuration</h2>
+        </div>
+      </header>
+
+      <div className={styles.row}>
         <p>
           <label htmlFor="dropdown">Optimization Formulation</label>
           <select
