@@ -66,15 +66,66 @@ const AxisLeft = (props) => {
       {ticks.map((tick) => (
         <g key={tick} transform={`translate(0, ${props.scale(tick)})`}>
           <line x1={-5} y1={0} x2={0} y2={0} />
-          <text x={-10} y={0} textAnchor="end" alignmentBaseline="middle">
+          <text
+            fill={props.stroke ? props.stroke : "#374f5e"}
+            x={-10}
+            y={0}
+            textAnchor="end"
+            alignmentBaseline="middle"
+          >
             {tick}
           </text>
         </g>
       ))}
       {props.label && (
         <text
+          fill={props.stroke ? props.stroke : "#374f5e"}
           textAnchor="middle"
-          transform={`translate(-52, ${props.innerHeight / 2}) rotate(-90)`}
+          transform={`translate(-60, ${props.innerHeight / 2}) rotate(-90)`}
+        >
+          {props.label}
+        </text>
+      )}
+    </g>
+  );
+};
+
+const AxisRight = (props) => {
+  const numberOfTicks = props.innerHeight / 50;
+  const ticks = props.scale.ticks(numberOfTicks);
+
+  return (
+    <g className={styles.axis}>
+      <line
+        x1={props.innerWidth}
+        y1={props.innerHeight}
+        x2={props.innerWidth}
+        y2={0}
+      />
+      {ticks.map((tick) => (
+        <g
+          key={tick}
+          transform={`translate(${props.innerWidth}, ${props.scale(tick)})`}
+        >
+          <line x1={5} y1={0} x2={0} y2={0} />
+          <text
+            fill={props.stroke ? props.stroke : "#374f5e"}
+            x={10}
+            y={0}
+            textAnchor="start"
+            alignmentBaseline="middle"
+          >
+            {tick}
+          </text>
+        </g>
+      ))}
+      {props.label && (
+        <text
+          fill={props.stroke ? props.stroke : "#374f5e"}
+          textAnchor="middle"
+          transform={`translate(${props.innerWidth + 62}, ${
+            props.innerHeight / 2
+          }) rotate(-90)`}
         >
           {props.label}
         </text>
@@ -90,6 +141,7 @@ const AxisBandBottom = (props) => {
       {props.ticks.map((tick) => (
         <text
           key={tick}
+          style={"fill:red"}
           textAnchor="end"
           alignmentBaseline="middle"
           transform={`translate(${
@@ -109,6 +161,8 @@ const Axis = (props) => {
       return AxisBottom(props);
     case "left":
       return AxisLeft(props);
+    case "right":
+      return AxisRight(props);
     case "band":
       return AxisBandBottom(props);
     case "time":
