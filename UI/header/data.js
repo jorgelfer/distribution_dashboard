@@ -26,7 +26,7 @@ export const DATADISPLAY = {
   },
   dr_load: {
     image: drImg,
-    title: "Demand Response",
+    title: "Demand Resp",
   },
   flex_gen: {
     image: pvImg,

@@ -1,0 +1,60 @@
+.config-modal {
+  border: none;
+  border-radius: 8px;
+  padding: 2rem;
+  background-color: #8f3a09;
+}
+
+.config-modal[open] {
+  animation: slide-in-from-top 0.35s ease-out;
+}
+
+.config-modal::backdrop {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.config-modal h2 {
+  font-family: "Handjet", monospace;
+  margin: 0 0 0.25rem 0;
+  font-size: 3rem;
+  text-transform: uppercase;
+}
+
+.config-modal progress {
+  width: 100%;
+  height: 1.5rem;
+  margin: 0;
+  accent-color: #46cebe;
+}
+
+.config-modal p {
+  margin: 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.config-modal p strong {
+  color: #10655b;
+}
+
+@keyframes slide-in-from-top {
+  0% {
+    transform: translateY(-15%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
