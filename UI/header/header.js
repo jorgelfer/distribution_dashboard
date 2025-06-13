@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import DetailsModal from "@/components/details/details-modal";
 import { useRef } from "react";
 
-export default function Header({ handleClick, selectedValue }) {
+export default function Header({ handleClick, selectedValue, data }) {
   function DataDisplay({ children, isSelected, ...props }) {
     return (
       <li
@@ -31,7 +31,7 @@ export default function Header({ handleClick, selectedValue }) {
   const path = usePathname();
   return (
     <>
-      <DetailsModal ref={dialog} />
+      <DetailsModal ref={dialog} data={data} />
       <div className="row">
         <div className={path.startsWith("/opendss") ? "col-10 " : "col-9"}>
           <div className={styles["main-header"]}>

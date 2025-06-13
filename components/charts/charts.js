@@ -2,9 +2,9 @@ import React from "react";
 import { useState } from "react";
 import * as d3 from "d3";
 import Header from "@/UI/header/header";
-import LineChartVM from "./lineChartVM";
-import LineChartPQS from "./lineChartPQS";
-import LineChartBSS from "./lineChartBSS";
+import LineChartVM from "./line-chart-VM";
+import LineChartPQS from "./line-chart-PQS";
+import LineChartBSS from "./line-chart-BSS";
 import NetworkGraph from "./network-graph";
 import { updateData } from "@/data/update";
 
@@ -38,7 +38,6 @@ export default function Charts(props) {
     }));
   }
 
-  console.log(props.data);
   const [vdata, vextent, data, y_extent] = updateData(
     props.data,
     selectedValue,
@@ -49,7 +48,11 @@ export default function Charts(props) {
 
   return (
     <>
-      <Header handleClick={handleClick} selectedValue={selectedValue} />
+      <Header
+        handleClick={handleClick}
+        selectedValue={selectedValue}
+        data={props.data}
+      />
       <div className="row">
         <div className="col-9">
           <NetworkGraph

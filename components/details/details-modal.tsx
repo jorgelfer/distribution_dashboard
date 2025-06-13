@@ -1,13 +1,16 @@
 import styles from "./details-modal.module.css";
 import React, { useImperativeHandle, forwardRef, useRef } from "react";
 import PowerFlowDetails from "./power-flow-details";
+import LineChartConv from "../charts/line-chart-conv";
 
 interface ChildHandle {
   open: () => void;
   close: () => void;
 }
 
-interface ChildProps {}
+interface ChildProps {
+  data: {};
+}
 
 const DetailsModal = forwardRef<ChildHandle, ChildProps>((props, ref) => {
   const dialog = useRef<HTMLDialogElement | null>(null);
@@ -27,9 +30,7 @@ const DetailsModal = forwardRef<ChildHandle, ChildProps>((props, ref) => {
 
   return (
     <dialog ref={dialog} className={styles["config-modal"]}>
-      {/* {path.startsWith("/power-flow") && (
-        <PowerFlowDetails onCloseDialog={handleDialogClose} />
-      )} */}
+      <LineChartConv data={props.data} />
       <form method="dialog">
         <button>Close</button>
       </form>

@@ -31,7 +31,6 @@ const AxisTimeBottom = (props) => {
 const AxisBottom = (props) => {
   const numberOfTicks = props.innerWidth / 100;
   const ticks = props.scale.ticks(numberOfTicks);
-  console.log(ticks);
 
   return (
     <g className="axis" transform={`translate(0, ${props.innerHeight})`}>
