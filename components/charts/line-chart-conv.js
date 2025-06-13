@@ -5,6 +5,7 @@ import ChartContainer from "../chartComponents/chartContainer";
 import Card from "@/UI/card/card";
 import Curve from "../chartComponents/curve";
 import Axis from "../chartComponents/axis";
+import { useEffect, useRef } from "react";
 
 export default function LineChartConv(props) {
   const margin = { top: 30, right: 30, bottom: 50, left: 70 };
@@ -14,9 +15,6 @@ export default function LineChartConv(props) {
   const innerHeight = height - margin.top - margin.bottom;
 
   // group data
-  const sumstat = props.data["error_it"];
-  const indexArray = sumstat.map((_, index) => index);
-
   const data = props.data["error_it"].map((d, i) => ({
     it: i,
     error: d,
@@ -29,10 +27,73 @@ export default function LineChartConv(props) {
     .domain(d3.extent(data.map((d) => d.it)))
     .range([0, innerWidth]);
 
-  const yScale = d3
+  const yScale_error = d3
     .scaleLinear()
     .domain(d3.extent(data.map((d) => d.error)))
     .range([innerHeight, 0]);
+
+  const yScale_time = d3
+    .scaleLinear()
+    .domain(d3.extent(data.map((d) => d.time)))
+    .range([innerHeight, 0]);
+
+  const errorRef = useRef();
+  useEffect(() => {
+    const errorContainer = d3.select(errorRef.current);
+    // define the 1st line
+    var valueline = d3
+      .line()
+      .x(function (d) {
+        return xScale(d.it);
+      })
+      .y(function (d) {
+        return yScale_error(d.error);
+      });
+
+    // define the 2nd line
+    var valueline2 = d3
+      .line()
+      .x(function (d) {
+        return xScale(d.it);
+      })
+      .y(function (d) {
+        return yScale_time(d.time);
+      });
+
+    // Add the valueline path.
+    errorContainer
+      .append("path")
+      .data([data])
+      .attr("class", "line")
+      .attr("d", valueline);
+
+    // Add the valueline2 path.
+    errorContainer
+      .append("path")
+      .data([data])
+      .attr("class", "line")
+      .style("stroke", "red")
+      .attr("d", valueline2);
+
+    // Add the X Axis
+    errorContainer
+      .append("g")
+      .attr("transform", "translate(0," + innerHeight + ")")
+      .call(d3.axisBottom(xScale));
+
+    // Add the Y0 Axis
+    errorContainer
+      .append("g")
+      .attr("class", "axisSteelBlue")
+      .call(d3.axisLeft(yScale_error));
+
+    // Add the Y1 Axis
+    errorContainer
+      .append("g")
+      .attr("class", "axisRed")
+      .attr("transform", "translate( " + innerWidth + ", 0 )")
+      .call(d3.axisRight(yScale_time));
+  }, [data, xScale, yScale_error, yScale_time]);
 
   return (
     <Card>
@@ -43,31 +104,7 @@ export default function LineChartConv(props) {
         margin={margin}
         className="line-chart"
       >
-        <Axis
-          type="bottom"
-          scale={xScale}
-          innerWidth={innerWidth}
-          innerHeight={innerHeight}
-          label={"Iterations"}
-        />
-        <Axis
-          type="left"
-          scale={yScale}
-          innerWidth={innerWidth}
-          innerHeight={innerHeight}
-          label="Error [%]"
-        />
-        <g key={`line-error`}>
-          <Curve
-            data={data}
-            xScale={xScale}
-            yScale={yScale}
-            xAccessor="it"
-            yAccessor="error"
-            stroke="red"
-            strokeWidth={2}
-          />
-        </g>
+        <g ref={errorRef} />
       </ChartContainer>
     </Card>
   );
