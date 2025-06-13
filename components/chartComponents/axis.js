@@ -1,11 +1,11 @@
-import "./axis.css";
+import styles from "./axis.module.css";
 
 const AxisTimeBottom = (props) => {
   const numberOfTicks = props.innerWidth / 50;
   const ticks = props.scale.ticks(numberOfTicks);
 
   return (
-    <g className="axis" transform={`translate(0, ${props.innerHeight})`}>
+    <g className={styles.axis} transform={`translate(0, ${props.innerHeight})`}>
       <line x1={0} y1={0} x2={props.innerWidth} y2={0} />
       {ticks.map((time) => (
         <g key={time} transform={`translate(${props.scale(time)}, 0)`}>
@@ -33,7 +33,7 @@ const AxisBottom = (props) => {
   const ticks = props.scale.ticks(numberOfTicks);
 
   return (
-    <g className="axis" transform={`translate(0, ${props.innerHeight})`}>
+    <g className={styles.axis} transform={`translate(0, ${props.innerHeight})`}>
       <line x1={0} y1={0} x2={props.innerWidth} y2={0} />
       {ticks.map((tick) => (
         <g key={tick} transform={`translate(${props.scale(tick)}, 0)`}>
@@ -61,7 +61,7 @@ const AxisLeft = (props) => {
   const ticks = props.scale.ticks(numberOfTicks);
 
   return (
-    <g className="axis">
+    <g className={styles.axis}>
       <line x1={0} y1={props.innerHeight} x2={0} y2={0} />
       {ticks.map((tick) => (
         <g key={tick} transform={`translate(0, ${props.scale(tick)})`}>
@@ -85,7 +85,7 @@ const AxisLeft = (props) => {
 
 const AxisBandBottom = (props) => {
   return (
-    <g className="axis" transform={`translate(0, ${props.innerHeight})`}>
+    <g className={styles.axis} transform={`translate(0, ${props.innerHeight})`}>
       <line x1={0} y1={0} x2={props.innerWidth} y2={0} />
       {props.ticks.map((tick) => (
         <text
