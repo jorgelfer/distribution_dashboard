@@ -59,9 +59,18 @@ export default function LineChartPQS(props) {
     }
   }
 
+  let quantity;
+  if (["flex_gen", "flex_load"].includes(props.selectedValue)) {
+    quantity = "Operating envelopes";
+  } else {
+    quantity = "Dispatched Power";
+  }
+
   return (
     <Card>
-      <h2>Operating envelopes: {props.selectedValue}</h2>
+      <h2>
+        {quantity}: {props.selectedValue}
+      </h2>
       <Buttons
         buttons={powers}
         activeButton={activePower}

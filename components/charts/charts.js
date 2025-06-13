@@ -38,6 +38,7 @@ export default function Charts(props) {
     }));
   }
 
+  console.log(props.data);
   const [vdata, vextent, data, y_extent] = updateData(
     props.data,
     selectedValue,

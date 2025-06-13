@@ -2,6 +2,8 @@ import styles from "./header.module.css";
 import { DATADISPLAY } from "./data.js";
 import Image from "next/image";
 
+import { usePathname } from "next/navigation";
+
 export default function Header({ handleClick, selectedValue }) {
   function DataDisplay({ children, isSelected, ...props }) {
     return (
@@ -19,9 +21,10 @@ export default function Header({ handleClick, selectedValue }) {
     );
   }
 
+  const path = usePathname();
   return (
     <div className="row">
-      <div className="col-10">
+      <div className={path.startsWith("/opendss") ? "col-10 " : "col-9"}>
         <div className={styles["main-header"]}>
           <ul>
             {Object.keys(DATADISPLAY).map((objKey) => (
@@ -36,6 +39,14 @@ export default function Header({ handleClick, selectedValue }) {
           </ul>
         </div>
       </div>
+      {!path.startsWith("/opendss") && (
+        <div className="col-3">
+          <p className={styles.actions}>
+            <button className={styles["details-flat"]}>Solution details</button>
+            <button className={styles["run-button"]}>Run</button>
+          </p>
+        </div>
+      )}
     </div>
   );
 }

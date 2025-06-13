@@ -6,7 +6,7 @@
   display: block;
   text-align: center;
   padding: 5px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .main-header > ul {
@@ -30,8 +30,8 @@
 }
 
 .main-tab img {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: inline-block;
   margin-top: 10px;
 }
@@ -39,18 +39,86 @@
 .main-tab p {
   display: block;
   color: #000000;
-  font-size: 12px;
+  font-size: 11px;
   margin-top: 2px;
 }
 
-@media screen and (min-width: 300px) {
+.actions {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.run-button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #319831;
+  color: #d9e2f1;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.5rem;
+  font-family: "Montserrat", sans-serif;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.run-button:hover,
+.run-button:focus {
+  background-color: #319890;
+}
+
+.run-button:disabled,
+.run-button:hover:disabled,
+.run-button:focus:disabled {
+  background: #ccc;
+  color: #979797;
+  cursor: not-allowed;
+}
+
+.details-flat {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: none;
+  background-color: #1a1d1d;
+  color: #ddd6cb;
+  font-size: 1.3rem;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.details-flat:hover,
+.details-flat:focus {
+  background-color: transparent;
+  color: #ffc905;
+}
+
+@media screen and (min-width: 500px) {
   .main-tab p {
-    font-size: 10px;
+    font-size: 11px;
+  }
+
+  .run-button {
+    font-size: 1.2rem;
+  }
+
+  .details-flat {
+    font-size: 1.2rem;
   }
 }
 
 @media screen and (min-width: 1000px) {
   .main-tab p {
     font-size: 15px;
+  }
+  .run-button {
+    font-size: 1.5rem;
+  }
+
+  .details-flat {
+    font-size: 1.5rem;
   }
 }
