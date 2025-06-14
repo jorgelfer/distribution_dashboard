@@ -31,7 +31,9 @@ export default function Header({ handleClick, selectedValue, data }) {
   const path = usePathname();
   return (
     <>
-      <DetailsModal ref={dialog} data={data} />
+      {!path.startsWith("/opendss") && (
+        <DetailsModal ref={dialog} data={data} />
+      )}
       <div className="row">
         <div className={path.startsWith("/opendss") ? "col-10 " : "col-9"}>
           <div className={styles["main-header"]}>

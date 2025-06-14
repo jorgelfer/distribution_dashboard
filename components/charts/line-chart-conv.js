@@ -8,8 +8,8 @@ import Axis from "../chartComponents/axis";
 
 export default function LineChartConv(props) {
   const margin = { top: 30, right: 70, bottom: 50, left: 70 };
-  const width = 500;
-  const height = 280;
+  const width = 450;
+  const height = 245;
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
