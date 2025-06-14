@@ -24,17 +24,13 @@ const DetailsModal = forwardRef<ChildHandle, ChildProps>((props, ref) => {
     },
   }));
 
-  function handleDialogClose() {
-    dialog.current?.close();
-  }
-
   return (
     <dialog ref={dialog} className={styles["config-modal"]}>
       <div className="row">
-        <div className="col-9">
+        <div className="col-8">
           <LineChartConv data={props.data} />
         </div>
-        <div className="col-3">
+        <div className="col-4">
           <h2>You </h2>
           <p>
             The target time was <strong> seconds</strong>

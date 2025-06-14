@@ -13,11 +13,18 @@
   background: rgba(0, 0, 0, 0.9);
 }
 
+.config-modal h3 {
+  font-family: "Handjet", monospace;
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+}
+
 .config-modal h2 {
   font-family: "Handjet", monospace;
   margin: 0 0 0.25rem 0;
-  font-size: 3rem;
+  font-size: 2rem;
   text-transform: uppercase;
+  color: #ffc905;
 }
 
 .config-modal progress {
@@ -30,10 +37,11 @@
 .config-modal p {
   margin: 0.5rem 0;
   font-size: 1.2rem;
+  color: aliceblue;
 }
 
 .config-modal p strong {
-  color: #10655b;
+  color: #ffc905;
 }
 
 @keyframes slide-in-from-top {
@@ -57,4 +65,10 @@
   100% {
     opacity: 0.5;
   }
+}
+
+.config-modal form {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }

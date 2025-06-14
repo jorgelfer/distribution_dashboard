@@ -38,7 +38,7 @@ export default function LineChartConv(props) {
 
   return (
     <Card>
-      <h2>Error Graph</h2>
+      <h3>Error Graph</h3>
       <ChartContainer
         width={width}
         height={height}
