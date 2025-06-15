@@ -1,6 +1,5 @@
 import styles from "./details-modal.module.css";
 import React, { useImperativeHandle, forwardRef, useRef } from "react";
-import PowerFlowDetails from "./power-flow-details";
 import LineChartConv from "../charts/line-chart-conv";
 
 interface ChildHandle {
@@ -8,8 +7,16 @@ interface ChildHandle {
   close: () => void;
 }
 
+interface SolutionData {
+  error_it: number[]; // Replace 'any' with the actual type if known
+  // add other properties of 'solution' if needed
+}
+
 interface ChildProps {
-  data: {};
+  data: {
+    solution: SolutionData;
+    // add other properties of 'data' if needed
+  };
 }
 
 const DetailsModal = forwardRef<ChildHandle, ChildProps>((props, ref) => {
@@ -24,6 +31,11 @@ const DetailsModal = forwardRef<ChildHandle, ChildProps>((props, ref) => {
     },
   }));
 
+  var num_it: number = props.data["solution"]["error_it"].length;
+  var last_error: number | undefined =
+    props.data["solution"]["error_it"].at(-1);
+  last_error = last_error && parseFloat((last_error * 100).toFixed(4));
+
   return (
     <dialog ref={dialog} className={styles["config-modal"]}>
       <div className="row">
@@ -31,12 +43,13 @@ const DetailsModal = forwardRef<ChildHandle, ChildProps>((props, ref) => {
           <LineChartConv data={props.data} />
         </div>
         <div className="col-4">
-          <h2>You </h2>
+          <h2>Solution </h2>
           <p>
-            The target time was <strong> seconds</strong>
+            The FBS algorithm converged in <strong>{num_it} iterations</strong>
           </p>
           <p>
-            You stopped the timer with <strong>X seconds left.</strong>
+            The error between iterations converged to{" "}
+            <strong>{last_error} %</strong>
           </p>
         </div>
       </div>

@@ -14,10 +14,10 @@ export default function LineChartConv(props) {
   const innerHeight = height - margin.top - margin.bottom;
 
   // group data
-  const data = props.data["error_it"].map((d, i) => ({
+  const data = props.data["solution"]["error_it"].map((d, i) => ({
     it: i,
     error: d,
-    time: props.data["time_it"][i],
+    time: props.data["solution"]["time_it"][i],
   }));
 
   // scales
