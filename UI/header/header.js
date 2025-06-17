@@ -3,7 +3,8 @@ import { DATADISPLAY } from "./data.js";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 
-import DetailsModal from "@/components/details/details-modal";
+import PowerFlowDetailsModal from "@/components/details/power-flow-details-modal";
+import SchedulingDetailsModal from "@/components/details/scheduling-details-modal";
 import { useRef } from "react";
 
 export default function Header({ handleClick, selectedValue, data }) {
@@ -31,8 +32,11 @@ export default function Header({ handleClick, selectedValue, data }) {
   const path = usePathname();
   return (
     <>
-      {!path.startsWith("/opendss") && (
-        <DetailsModal ref={dialog} data={data} />
+      {path.startsWith("/power-flow") && (
+        <PowerFlowDetailsModal ref={dialog} data={data} />
+      )}
+      {path.startsWith("/scheduling") && (
+        <SchedulingDetailsModal ref={dialog} data={data} />
       )}
       <div className="row">
         <div className={path.startsWith("/opendss") ? "col-10 " : "col-9"}>
