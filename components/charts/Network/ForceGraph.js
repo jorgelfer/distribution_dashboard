@@ -14,6 +14,7 @@ export default function ForceGraph(props) {
     { value: "cursor", label: "Cursor" },
     { value: "plus", label: "Add/Remove" },
     { value: "brush", label: "Brush" },
+    { value: "download", label: "Download" },
   ];
 
   const [showSymbol, setShowSymbol] = useState(false);

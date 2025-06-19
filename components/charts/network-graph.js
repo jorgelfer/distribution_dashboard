@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import * as d3 from "d3";
 
 import Card from "@/UI/card/card";
@@ -13,6 +13,10 @@ import GeojsonMap from "./mapping/GeojsonMap";
 import bronx from "./mapping/bronx.json";
 
 import Form from "@/UI/device/form";
+
+// to download the graph as a PDF
+import html2canvas from "html2canvas";
+import { jsPDF } from "jspdf";
 
 const layers = [
   { id: "react", label: "React.js" },
@@ -148,6 +152,9 @@ export default function NetworkGraph({ margin, data, ...props }) {
     if (selectedAction !== selectedIcon) {
       setSelectedAction(selectedIcon);
     }
+    if (selectedIcon === "download") {
+      handleDownloadPdf();
+    }
   }
 
   // change action to default when a layer changes or
@@ -156,8 +163,23 @@ export default function NetworkGraph({ margin, data, ...props }) {
     setSelectedAction("cursor");
   }, [activeLayer, props.selectedValue]);
 
+  const printRef = useRef();
+  const handleDownloadPdf = async () => {
+    const element = printRef.current;
+    const canvas = await html2canvas(element);
+    const data = canvas.toDataURL("image/png");
+
+    const pdf = new jsPDF();
+    const imgProperties = pdf.getImageProperties(data);
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width;
+
+    pdf.addImage(data, "PNG", 0, 0, pdfWidth, pdfHeight);
+    pdf.save("print.pdf");
+  };
+
   return (
-    <Card>
+    <Card ref={printRef}>
       <h2>Network</h2>
       <Buttons
         buttons={layers}
