@@ -73,6 +73,13 @@ export default function ForceGraph(props) {
     props.onSelectBus([d]);
   }
 
+  // Handler click events on lines
+  function line_click(event) {
+    let d = props.data.branch.find((d) => d.uid === event.target.id);
+    // console.log(d);
+    props.onSelectLine([d]);
+  }
+
   // Handlers for click events on node groups
   function group_click(event) {
     let d = props.data.bus.find((d) => d.uid === event.target.id);
@@ -213,13 +220,15 @@ export default function ForceGraph(props) {
       {links.map((d, i) => (
         <Line
           key={d.uid}
-          class="link"
+          class="line"
+          id={d.uid}
           x1={props.xScale(d.source.x)}
           y1={props.yScale(d.source.y)}
           x2={props.xScale(d.target.x)}
           y2={props.yScale(d.target.y)}
           stroke="grey"
           strokeWidth={props.linkScale(d.f_connections.length)}
+          onClick={props.selectedAction === "cursor" && line_click}
         />
       ))}
       {nodes.map((d, i) => (

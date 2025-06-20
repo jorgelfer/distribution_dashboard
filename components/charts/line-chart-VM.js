@@ -32,7 +32,7 @@ export default function LineChartVM(props) {
 
   return (
     <Card>
-      <h2>Voltage Magnitude</h2>
+      <h3>Voltage Magnitude</h3>
       <ChartContainer
         width={width}
         height={height}

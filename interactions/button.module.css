@@ -1,14 +1,7 @@
-.buttons {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin: 10px 0;
-}
-
 .button {
   margin: 0;
   padding: 8px 10px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-size: 1.4rem;
   color: #06273b;
   background-color: transparent;
@@ -20,11 +13,23 @@
 .button:first-of-type {
   border-left: 1px dashed #06273b;
 }
-.button:hover,
-.button.active {
+.button:hover {
   background-color: rgba(6, 39, 59, 0.15);
   transition-timing-function: ease-out;
 }
-.button.active {
-  cursor: default;
+
+.active {
+  background-color: rgba(6, 39, 59, 0.15);
+}
+
+@media screen and (min-width: 500px) {
+  .button {
+    font-size: 0.7rem;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .button {
+    font-size: 1.3rem;
+  }
 }

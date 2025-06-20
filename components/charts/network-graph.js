@@ -7,7 +7,7 @@ import Buttons from "@/interactions/buttons";
 
 import NodeBreaker from "./network/nodeBreaker";
 import Net from "./network/net";
-import ForceGraph from "./network/forceGraph";
+import ForceGraph from "./network/force-graph";
 
 import GeojsonMap from "./mapping/GeojsonMap";
 import bronx from "./mapping/bronx.json";
@@ -29,12 +29,11 @@ const layers = [
 
 export default function NetworkGraph({ margin, data, ...props }) {
   const width = 1000;
-  const height = 542;
+  const height = 590;
   const innerWidth = width - margin.left - margin.right;
   const innerHeight = height - margin.top - margin.bottom;
 
   const xScale = d3.scaleLinear().range([0, innerWidth]);
-
   const yScale = d3.scaleLinear().range([innerHeight, 0]);
 
   // scales
@@ -218,6 +217,7 @@ export default function NetworkGraph({ margin, data, ...props }) {
             selectedValue={props.selectedValue}
             selectedAction={selectedAction}
             onSelectBus={props.onSelectBus}
+            onSelectLine={props.onSelectLine}
             onSelectDevice={handleSelectDevice}
             onSubmitDevice={handleSubmitDevice}
             onDeleteBuses={handleDeleteBuses}

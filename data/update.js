@@ -4,6 +4,7 @@ export function updateData(
   network,
   selectedValue,
   selectedBuses,
+  selectedLine,
   dateParser,
   vm_base
 ) {
@@ -30,6 +31,7 @@ export function updateData(
       });
     }
   });
+
   // push lower limit
   const vm_lb = 1 - (isNaN(network["ansi"]) ? vm_base : +network["ansi"]);
   network["time"].forEach((d, i) => {
@@ -40,6 +42,7 @@ export function updateData(
       uid: "lb.0",
     });
   });
+
   // push upper limit
   const vm_ub = 1 + (isNaN(network["ansi"]) ? vm_base : +network["ansi"]);
   network["time"].forEach((d, i) => {
@@ -57,7 +60,79 @@ export function updateData(
   let data = [];
   switch (selectedValue) {
     case "flow":
-      return [vdata, vextent, data, [0, 0]];
+      // organize data
+      let data_nm = [];
+      selectedLine.forEach((d, i) => {
+        d["f_connections"].forEach((d2, i2) => {
+          data_nm.push(
+            d.p_nm[d2.toString()].map((d3, i3) => ({
+              time: dateParser(network["time"][i3]),
+              p: +d3,
+              q: +d.q_nm[d2.toString()][i3],
+              s: Math.sqrt(
+                Math.pow(+d3, 2) + Math.pow(+d.q_nm[d2.toString()][i3], 2)
+              ),
+              phase: d2.toString(),
+              branch: d.uid,
+              uid: d.uid + "." + d2.toString(),
+            }))
+          );
+        });
+        // append limit
+        network["time"].forEach((d2, i2) => {
+          data_nm.push({
+            time: dateParser(d2),
+            p: +d["normal_flow_limit"],
+            q: +d["normal_flow_limit"],
+            s: +d["normal_flow_limit"],
+            phase: "4",
+            branch: d.uid,
+            uid: d.uid + ".4",
+          });
+        });
+      });
+
+      let data_mn = [];
+      selectedLine.forEach((d, i) => {
+        d["t_connections"].forEach((d2, i2) => {
+          data_mn.push(
+            d.p_mn[d2.toString()].map((d3, i3) => ({
+              time: dateParser(network["time"][i3]),
+              p: -d3,
+              q: -d.q_mn[d2.toString()][i3],
+              s: Math.sqrt(
+                Math.pow(+d3, 2) + Math.pow(+d.q_mn[d2.toString()][i3], 2)
+              ),
+              phase: d2.toString(),
+              branch: d.uid,
+              uid: d.uid + "." + d2.toString(),
+            }))
+          );
+        });
+        // append limit
+        network["time"].forEach((d2, i2) => {
+          data_mn.push({
+            time: dateParser(d2),
+            p: +d["normal_flow_limit"],
+            q: +d["normal_flow_limit"],
+            s: +d["normal_flow_limit"],
+            phase: "4",
+            branch: d.uid,
+            uid: d.uid + ".4",
+          });
+        });
+      });
+
+      // console.log("data", data);
+      return [
+        vdata,
+        vextent,
+        [data_nm, data_mn],
+        [
+          [0, d3.max(data_nm.flat().map((d) => d.s))],
+          [0, d3.max(data_mn.flat().map((d) => d.s))],
+        ],
+      ];
 
     case "vsource":
       // organize data

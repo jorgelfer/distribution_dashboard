@@ -61,7 +61,7 @@ export default function LineChartBSS(props) {
 
   return (
     <Card>
-      <h2>Operation Values: {props.selectedValue}</h2>
+      <h3>Operation Values: {props.selectedValue}</h3>
       <Buttons
         buttons={powers}
         activeButton={activeValue}

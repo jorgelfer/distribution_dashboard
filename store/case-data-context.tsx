@@ -15,7 +15,7 @@ type CaseContextObj = {
 
 // createContext returns a React component.
 export const CaseContext = React.createContext<CaseContextObj>({
-  case: new Case("13Bus"),
+  case: new Case("4Bus"), // default case
   changeCase: () => {},
   config: new Config("fbs", 100),
   changeConfig: () => {},
@@ -26,7 +26,7 @@ export const CaseContext = React.createContext<CaseContextObj>({
 const CaseContextProvider: React.FC<{ children: React.ReactNode }> = (
   props
 ) => {
-  const [enteredCase, setEnteredCase] = useState<Case>(new Case("13Bus"));
+  const [enteredCase, setEnteredCase] = useState<Case>(new Case("4Bus"));
 
   const handleCaseChange = (inputCase: Case) => {
     setEnteredCase(inputCase);

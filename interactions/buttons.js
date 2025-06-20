@@ -1,9 +1,9 @@
-import Button from "@/UI/button";
-import "./buttons.css";
+import Button from "./button";
+import styles from "./buttons.module.css";
 
 export default function Buttons(props) {
   return (
-    <div className="buttons">
+    <div className={styles.buttons}>
       {props.buttons.map((button) => (
         <Button
           key={button.id}

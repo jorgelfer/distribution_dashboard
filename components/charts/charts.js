@@ -38,10 +38,17 @@ export default function Charts(props) {
     }));
   }
 
+  // selected line
+  const [selectedLine, setSelectedLine] = useState([]);
+  function handleSelectLine(line) {
+    setSelectedLine(line);
+  }
+
   const [vdata, vextent, data, y_extent] = updateData(
     props.data,
     selectedValue,
     selectedBuses,
+    selectedLine,
     dateParser,
     props.vm_base
   );
@@ -61,52 +68,88 @@ export default function Charts(props) {
             colorScale={colorScale}
             selectedValue={selectedValue}
             onSelectBus={handleSelectBus}
+            onSelectLine={handleSelectLine}
             nodeSize={props.nodeSize}
           />
-          {selectedBuses.buses.length > 0 && (
-            <p className="actions">
-              <button onClick={() => handleSelectBus([])}>Release</button>
-            </p>
-          )}
+          {selectedBuses.buses.length > 0 ||
+            (selectedLine.length > 0 && (
+              <p className="actions">
+                <button
+                  onClick={() => {
+                    handleSelectBus([]);
+                    handleSelectLine([]);
+                  }}
+                >
+                  Release
+                </button>
+              </p>
+            ))}
         </div>
         <div className="col-3">
-          <LineChartVM
-            margin={margin}
-            data={vdata}
-            y_extent={vextent}
-            colorScale={colorScale}
-            time={props.data["time"]}
-            dateParser={dateParser}
-            selectedValue={selectedValue}
-          />
-          {["battery"].includes(selectedValue) && (
-            <LineChartBSS
-              margin={margin}
-              data={data}
-              y_extent={y_extent}
-              colorScale={colorScale}
-              time={props.data["time"]}
-              dateParser={dateParser}
-              selectedValue={selectedValue}
-            />
-          )}
-          {[
-            "vsource",
-            "load",
-            "dr_load",
-            "flex_gen",
-            "flex_load",
-            "mismatch",
-          ].includes(selectedValue) && (
-            <LineChartPQS
-              margin={margin}
-              data={data}
-              y_extent={y_extent}
-              colorScale={colorScale}
-              time={props.data["time"]}
-              dateParser={dateParser}
-              selectedValue={selectedValue}
-            />
+          {selectedValue === "flow" ? (
+            <>
+              <LineChartPQS
+                margin={margin}
+                data={data[0]}
+                y_extent={y_extent[0]}
+                colorScale={colorScale}
+                time={props.data["time"]}
+                dateParser={dateParser}
+                selectedValue={selectedValue}
+                direction="from -> to"
+              />
+              <LineChartPQS
+                margin={margin}
+                data={data[1]}
+                y_extent={y_extent[1]}
+                colorScale={colorScale}
+                time={props.data["time"]}
+                dateParser={dateParser}
+                selectedValue={selectedValue}
+                direction="to -> from"
+              />
+            </>
+          ) : (
+            <>
+              <LineChartVM
+                margin={margin}
+                data={vdata}
+                y_extent={vextent}
+                colorScale={colorScale}
+                time={props.data["time"]}
+                dateParser={dateParser}
+                selectedValue={selectedValue}
+              />
+              {["battery"].includes(selectedValue) && (
+                <LineChartBSS
+                  margin={margin}
+                  data={data}
+                  y_extent={y_extent}
+                  colorScale={colorScale}
+                  time={props.data["time"]}
+                  dateParser={dateParser}
+                  selectedValue={selectedValue}
+                />
+              )}
+              {[
+                "vsource",
+                "load",
+                "dr_load",
+                "flex_gen",
+                "flex_load",
+                "mismatch",
+              ].includes(selectedValue) && (
+                <LineChartPQS
+                  margin={margin}
+                  data={data}
+                  y_extent={y_extent}
+                  colorScale={colorScale}
+                  time={props.data["time"]}
+                  dateParser={dateParser}
+                  selectedValue={selectedValue}
+                />
+              )}
+            </>
           )}
         </div>
       </div>

@@ -90,8 +90,8 @@ body {
   max-width: 33.33%;
 }
 .col-3 {
-  margin-top: -5px;
-  flex: 0 0 25%;
+  /* margin-top: -5px; */
+  flex: 1 1 25%;
   max-width: 25%;
 }
 
@@ -156,4 +156,9 @@ body {
 .button-flat:focus {
   background-color: transparent;
   color: #ffc905;
+}
+
+.line:hover {
+  stroke: #ffc905;
+  fill: #ffc905;
 }

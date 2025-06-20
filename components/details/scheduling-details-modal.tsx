@@ -57,30 +57,30 @@ const SchedulingDetailsModal = forwardRef<ChildHandle, ChildProps>(
     conv_time = parseFloat(conv_time.toFixed(4));
     return (
       <dialog ref={dialog} className={styles["config-modal"]}>
-        {formu === "fbs" && (
-          <div className="row">
-            <div className="col-8">
-              <LineChartConv data={props.data} />
-            </div>
-            <div className="col-4">
-              <h2>Solution </h2>
-              <p>
-                Model obj: <strong>{obj}</strong>, with solver{" "}
-                <strong>{solver}</strong>. Is feasible? <strong>{feas}</strong>
-              </p>
-              <p>
-                The linearized algorithm converged in{" "}
-                <strong>{conv_time} seconds </strong> and{" "}
-                <strong>{num_it} iterations</strong>
-              </p>
-              <p>
-                The error between iterations converged to{" "}
-                <strong>{last_error} %</strong>
-              </p>
-            </div>
+        {/* {formu === "fbs" && ( */}
+        <div className="row">
+          <div className="col-8">
+            <LineChartConv data={props.data} />
           </div>
-        )}
-        {formu !== "fbs" && (
+          <div className="col-4">
+            <h2>Solution </h2>
+            <p>
+              Model obj: <strong>{obj}</strong>, with solver{" "}
+              <strong>{solver}</strong>. Is feasible? <strong>{feas}</strong>
+            </p>
+            <p>
+              The linearized algorithm converged in{" "}
+              <strong>{conv_time} seconds </strong> and{" "}
+              <strong>{num_it} iterations</strong>
+            </p>
+            <p>
+              The error between iterations converged to{" "}
+              <strong>{last_error} %</strong>
+            </p>
+          </div>
+        </div>
+        {/* )} */}
+        {/* {formu !== "fbs" && (
           <div className="row">
             <div className="col-10">
               <h2>Solution </h2>
@@ -94,7 +94,7 @@ const SchedulingDetailsModal = forwardRef<ChildHandle, ChildProps>(
               </p>
             </div>
           </div>
-        )}
+        )} */}
         <form method="dialog">
           <button>Close</button>
         </form>

@@ -5,3 +5,23 @@
   border-radius: 5px;
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
 }
+
+@media screen and (min-width: 500px) {
+  .card h2 {
+    font-size: 15px;
+  }
+
+  .card h3 {
+    font-size: 12px;
+  }
+}
+
+@media screen and (min-width: 1000px) {
+  .card h2 {
+    font-size: 25px;
+  }
+
+  .card h3 {
+    font-size: 20px;
+  }
+}
