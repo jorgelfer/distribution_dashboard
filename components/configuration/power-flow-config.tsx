@@ -10,19 +10,23 @@ interface ChildProps {
   onCloseDialog: () => void;
 }
 const PowerFlowConfig: React.FC<ChildProps> = ({ onCloseDialog }) => {
-  //   const initializations = [
-  //     { value: "opendss", label: "OpenDSS voltage start" },
-  //     { value: "flat", label: "Flat voltage start" },
-  //   ];
+  const initialization = [
+    { value: false, label: "OpenDSS" },
+    { value: true, label: "Flat" },
+  ];
+
   const kVA_bases = [1, 10, 100];
 
   // handle change in configuration
   const router = useRouter();
   const [enteredConfig, setEnteredConf] = useState<Config>(
-    new Config("fbs", 100)
+    new Config("fbs", 100, false)
   );
 
-  function handleInputChange(identifier: string, value: string | number) {
+  function handleInputChange(
+    identifier: string,
+    value: string | number | boolean
+  ) {
     setEnteredConf((prevCase) => ({
       ...prevCase,
       [identifier]: value,
@@ -45,24 +49,34 @@ const PowerFlowConfig: React.FC<ChildProps> = ({ onCloseDialog }) => {
         </div>
       </header>
 
-      <div className={styles.row}>
-        <p>
-          <label htmlFor="dropdown">kVA_base</label>
-          <select
-            id="kVA_base"
-            value={enteredConfig.kVA_base}
-            onChange={(event) =>
-              handleInputChange("kVA_base", event.target.value)
-            }
-          >
-            {kVA_bases.map((kVA_base) => (
-              <option key={kVA_base} value={kVA_base}>
-                {kVA_base}
-              </option>
-            ))}
-          </select>
-        </p>
+      {/* <div className={styles.row}> */}
+      <div className={styles.control}>
+        <label htmlFor="checkbox">Flat Start</label>
+        <input
+          type="checkbox"
+          checked={enteredConfig.flat_start}
+          onChange={(event) =>
+            handleInputChange("flat_start", event.target.checked)
+          }
+        />
       </div>
+      <p>
+        <label htmlFor="dropdown">kVA_base</label>
+        <select
+          id="kVA_base"
+          value={enteredConfig.kVA_base}
+          onChange={(event) =>
+            handleInputChange("kVA_base", event.target.value)
+          }
+        >
+          {kVA_bases.map((kVA_base) => (
+            <option key={kVA_base} value={kVA_base}>
+              {kVA_base}
+            </option>
+          ))}
+        </select>
+      </p>
+      {/* </div> */}
 
       <p className="actions">
         <button type="button" className="button-flat" onClick={onCloseDialog}>

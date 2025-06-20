@@ -10,6 +10,7 @@ const ShowPowerFlow: React.FC = () => {
   const networkModel = caseCtx.case.networkModel;
   const inFile1 = caseCtx.case.inFile1;
   const kVA_base = caseCtx.config.kVA_base;
+  const flat_start = caseCtx.config.flat_start;
 
   // get OpenDSS using tanstack query cache
   const qstsURL = `http://127.0.0.1:5000/qsts/${networkModel}/${inFile1}`;
@@ -22,11 +23,12 @@ const ShowPowerFlow: React.FC = () => {
   // energy scheduling call
   opendssData["kVA_base"] =
     typeof kVA_base !== "number" ? parseFloat(kVA_base) : kVA_base;
+  opendssData["flat_start"] = flat_start;
   opendssData["formulation"] = "fbs";
 
   // get scheduling data
   let { data } = useSuspenseQuery({
-    queryKey: ["power_flow", networkModel, inFile1, kVA_base],
+    queryKey: ["power_flow", networkModel, inFile1, kVA_base, flat_start],
     queryFn: () => fetchFBSData(opendssData),
     staleTime: Infinity, // 5 minutes
   });

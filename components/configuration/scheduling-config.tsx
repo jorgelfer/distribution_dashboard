@@ -20,7 +20,7 @@ const SchedulingConfig: React.FC<ChildProps> = ({ onCloseDialog }) => {
   // handle change in configuration
   const router = useRouter();
   const [enteredConfig, setEnteredConf] = useState<Config>(
-    new Config("fbs", 100)
+    new Config("fbs", 100, false)
   );
 
   function handleInputChange(identifier: string, value: string | number) {

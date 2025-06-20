@@ -17,7 +17,7 @@ type CaseContextObj = {
 export const CaseContext = React.createContext<CaseContextObj>({
   case: new Case("4Bus"), // default case
   changeCase: () => {},
-  config: new Config("fbs", 100),
+  config: new Config("fbs", 100, false),
   changeConfig: () => {},
   enabled: false,
   changeEnabled: () => {},
@@ -33,7 +33,7 @@ const CaseContextProvider: React.FC<{ children: React.ReactNode }> = (
   };
 
   const [enteredConfig, setEnteredConfig] = useState<Config>(
-    new Config("fbs", 100)
+    new Config("fbs", 100, false)
   );
 
   const handleConfigChange = (inputConfig: Config) => {

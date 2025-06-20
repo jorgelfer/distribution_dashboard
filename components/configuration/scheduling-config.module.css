@@ -84,3 +84,23 @@
 .row p {
   width: 100%;
 }
+
+.control:has(input[type="checkbox"]) {
+  display: flex;
+  align-items: center;
+}
+
+.control:has(input[type="checkbox"]) label {
+  margin: 10px 10px 10px 0;
+}
+
+.control input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+  max-width: none;
+  margin-right: 0.5rem;
+  border-radius: 0;
+  border: none;
+  background-color: transparent;
+  color: #d9e2f1;
+}
