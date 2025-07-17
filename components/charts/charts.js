@@ -71,19 +71,18 @@ export default function Charts(props) {
             onSelectLine={handleSelectLine}
             nodeSize={props.nodeSize}
           />
-          {selectedBuses.buses.length > 0 ||
-            (selectedLine.length > 0 && (
-              <p className="actions">
-                <button
-                  onClick={() => {
-                    handleSelectBus([]);
-                    handleSelectLine([]);
-                  }}
-                >
-                  Release
-                </button>
-              </p>
-            ))}
+          {(selectedBuses.buses.length > 0 || selectedLine.length > 0) && (
+            <p className="actions">
+              <button
+                onClick={() => {
+                  handleSelectBus([]);
+                  handleSelectLine([]);
+                }}
+              >
+                Release
+              </button>
+            </p>
+          )}
         </div>
         <div className="col-3">
           {selectedValue === "flow" ? (

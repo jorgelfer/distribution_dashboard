@@ -58,7 +58,8 @@ export default function NetworkGraph({ margin, data, ...props }) {
       if (!remove) {
         data[`${props.selectedValue}`].push(device);
       }
-      // console.log(data[`${props.selectedValue}`]);
+
+      // disassociate the data to avoid mutations
       network = JSON.parse(JSON.stringify(data));
     },
     [data, props.selectedValue]

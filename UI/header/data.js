@@ -38,6 +38,6 @@ export const DATADISPLAY = {
   },
   mismatch: {
     image: mismatchImg,
-    title: "Power Mismatch",
+    title: "Mismatch",
   },
 };

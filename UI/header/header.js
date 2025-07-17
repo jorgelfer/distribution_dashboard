@@ -5,9 +5,14 @@ import { usePathname } from "next/navigation";
 
 import PowerFlowDetailsModal from "@/components/details/power-flow-details-modal";
 import SchedulingDetailsModal from "@/components/details/scheduling-details-modal";
-import { useRef } from "react";
+import { useContext, useRef } from "react";
+import { CaseContext } from "@/store/case-data-context";
 
 export default function Header({ handleClick, selectedValue, data }) {
+  // get context
+  const caseCtx = useContext(CaseContext);
+  const isEnabled = caseCtx.enabled;
+
   function DataDisplay({ children, isSelected, ...props }) {
     return (
       <li
@@ -39,7 +44,7 @@ export default function Header({ handleClick, selectedValue, data }) {
         <SchedulingDetailsModal ref={dialog} data={data} />
       )}
       <div className="row">
-        <div className={path.startsWith("/opendss") ? "col-10 " : "col-9"}>
+        <div className="col-9">
           <div className={styles["main-header"]}>
             <ul>
               {Object.keys(DATADISPLAY).map((objKey) => (
@@ -54,19 +59,20 @@ export default function Header({ handleClick, selectedValue, data }) {
             </ul>
           </div>
         </div>
-        {!path.startsWith("/opendss") && (
-          <div className="col-3">
-            <p className={styles.actions}>
-              <button
-                className={styles["details-flat"]}
-                onClick={handleDetailsClick}
-              >
-                Solution details
-              </button>
-              <button className={styles["run-button"]}>Run</button>
-            </p>
-          </div>
-        )}
+        <div className="col-3">
+          <p className={styles.actions}>
+            <button
+              className={styles["details-flat"]}
+              disabled={!isEnabled}
+              onClick={handleDetailsClick}
+            >
+              Solution details
+            </button>
+            <button className={styles["run-button"]} disabled={!isEnabled}>
+              Run
+            </button>
+          </p>
+        </div>
       </div>
     </>
   );
