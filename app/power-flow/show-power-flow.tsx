@@ -20,6 +20,8 @@ const ShowPowerFlow: React.FC = () => {
     staleTime: Infinity, // 5 minutes
   });
 
+  console.log("OpenDSS data:", opendssData);
+
   // energy scheduling call
   opendssData["kVA_base"] =
     typeof kVA_base !== "number" ? parseFloat(kVA_base) : kVA_base;
@@ -28,7 +30,14 @@ const ShowPowerFlow: React.FC = () => {
 
   // get scheduling data
   let { data } = useSuspenseQuery({
-    queryKey: ["power_flow", networkModel, inFile1, kVA_base, flat_start],
+    queryKey: [
+      "power_flow",
+      opendssData,
+      networkModel,
+      inFile1,
+      kVA_base,
+      flat_start,
+    ],
     queryFn: () => fetchFBSData(opendssData),
     staleTime: Infinity, // 5 minutes
   });

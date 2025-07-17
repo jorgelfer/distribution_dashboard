@@ -8,7 +8,13 @@ import SchedulingDetailsModal from "@/components/details/scheduling-details-moda
 import { useContext, useRef } from "react";
 import { CaseContext } from "@/store/case-data-context";
 
+import { renderPage } from "@/lib/actions";
+import { useQueryClient } from "@tanstack/react-query";
+
 export default function Header({ handleClick, selectedValue, data }) {
+  // get query client
+  const queryClient = useQueryClient();
+
   // get context
   const caseCtx = useContext(CaseContext);
   const isEnabled = caseCtx.enabled;
@@ -34,7 +40,42 @@ export default function Header({ handleClick, selectedValue, data }) {
     dialog.current.open();
   }
 
+  const getActiveQueryKeys = () => {
+    // Access the queryCache from the queryClient
+    const queryCache = queryClient.getQueryCache();
+
+    // Use getAll() to get an array of all queries in the cache
+    const allQueries = queryCache.getAll();
+
+    // Map over the queries to extract their query keys
+    const queryKeys = allQueries.map((query) => query.queryKey);
+
+    return queryKeys;
+  };
+
   const path = usePathname();
+  function handleRunClick() {
+    // Optimistically update the cache
+    queryClient.setQueryData(
+      ["opendss", caseCtx.case.networkModel, caseCtx.case.inFile1],
+      (oldData) => {
+        // oldData is the current cached data for 'myData'
+        return data;
+      }
+    );
+
+    // const keys = getActiveQueryKeys();
+    // console.log("Available Query Keys:", keys);
+    // console.log("key of interest", [
+    //   "opendss",
+    //   caseCtx.case.networkModel,
+    //   caseCtx.case.inFile1,
+    // ]);
+    // alert("Check the console for the list of query keys!");
+
+    renderPage(path);
+  }
+
   return (
     <>
       {path.startsWith("/power-flow") && (
@@ -68,7 +109,11 @@ export default function Header({ handleClick, selectedValue, data }) {
             >
               Solution details
             </button>
-            <button className={styles["run-button"]} disabled={!isEnabled}>
+            <button
+              className={styles["run-button"]}
+              disabled={!isEnabled}
+              onClick={handleRunClick}
+            >
               Run
             </button>
           </p>

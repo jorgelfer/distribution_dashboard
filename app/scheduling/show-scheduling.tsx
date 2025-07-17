@@ -27,7 +27,14 @@ const ShowScheduling: React.FC = () => {
 
   // get scheduling data
   let { data } = useSuspenseQuery({
-    queryKey: ["scheduling", networkModel, inFile1, formulation, kVA_base],
+    queryKey: [
+      "scheduling",
+      opendssData,
+      networkModel,
+      inFile1,
+      formulation,
+      kVA_base,
+    ],
     queryFn: () => fetchSchedulingData(opendssData),
     staleTime: Infinity, // 5 minutes
   });
