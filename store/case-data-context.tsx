@@ -11,6 +11,8 @@ type CaseContextObj = {
   changeConfig: (inputConfig: Config) => void;
   enabled: boolean;
   changeEnabled: (enabled: boolean) => void;
+  loggedIn: boolean;
+  changeLoggedIn: (loggedIn: boolean) => void;
 };
 
 // createContext returns a React component.
@@ -21,6 +23,8 @@ export const CaseContext = React.createContext<CaseContextObj>({
   changeConfig: () => {},
   enabled: false,
   changeEnabled: () => {},
+  loggedIn: false,
+  changeLoggedIn: () => {},
 });
 
 const CaseContextProvider: React.FC<{ children: React.ReactNode }> = (
@@ -46,6 +50,12 @@ const CaseContextProvider: React.FC<{ children: React.ReactNode }> = (
     setIsEnabled(enabled);
   };
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleIsLoggedIn = (loggedIn: boolean) => {
+    setIsLoggedIn(loggedIn);
+  };
+
   const contextValue: CaseContextObj = {
     case: enteredCase,
     changeCase: handleCaseChange,
@@ -53,6 +63,8 @@ const CaseContextProvider: React.FC<{ children: React.ReactNode }> = (
     changeConfig: handleConfigChange,
     enabled: isEnabled,
     changeEnabled: handleIsEnabled,
+    loggedIn: isLoggedIn,
+    changeLoggedIn: handleIsLoggedIn,
   };
 
   return (

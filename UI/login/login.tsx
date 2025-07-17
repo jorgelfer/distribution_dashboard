@@ -29,12 +29,14 @@ const Login: React.FC = () => {
   const submitHandle = (event: React.FormEvent) => {
     event.preventDefault();
     caseCtx.changeCase(enteredCase);
+    caseCtx.changeLoggedIn(true);
 
     router.push("/opendss");
   };
 
   useEffect(() => {
     caseCtx.changeEnabled(false);
+    caseCtx.changeLoggedIn(false);
   }, []);
 
   return (
