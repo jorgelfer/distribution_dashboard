@@ -18,7 +18,11 @@ const ShowScheduling: React.FC = () => {
     queryKey: ["opendss", networkModel, inFile1],
     queryFn: () => fetchOpenDSSData(qstsURL),
     staleTime: Infinity, // 5 minutes
+    refetchOnWindowFocus: false,
+    refetchOnMount: false,
+    refetchOnReconnect: false,
   });
+  console.log("OpenDSS data:", opendssData);
 
   // energy scheduling call
   opendssData["kVA_base"] =

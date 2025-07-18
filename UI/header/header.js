@@ -40,19 +40,6 @@ export default function Header({ handleClick, selectedValue, data }) {
     dialog.current.open();
   }
 
-  const getActiveQueryKeys = () => {
-    // Access the queryCache from the queryClient
-    const queryCache = queryClient.getQueryCache();
-
-    // Use getAll() to get an array of all queries in the cache
-    const allQueries = queryCache.getAll();
-
-    // Map over the queries to extract their query keys
-    const queryKeys = allQueries.map((query) => query.queryKey);
-
-    return queryKeys;
-  };
-
   const path = usePathname();
   function handleRunClick() {
     // Optimistically update the cache
@@ -87,15 +74,6 @@ export default function Header({ handleClick, selectedValue, data }) {
         };
       }
     );
-
-    // const keys = getActiveQueryKeys();
-    // console.log("Available Query Keys:", keys);
-    // console.log("key of interest", [
-    //   "opendss",
-    //   caseCtx.case.networkModel,
-    //   caseCtx.case.inFile1,
-    // ]);
-    // alert("Check the console for the list of query keys!");
 
     renderPage(path);
   }

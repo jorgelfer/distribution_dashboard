@@ -47,9 +47,21 @@ export default function UnitForm({
               id="power_rating"
               type="number"
               name="power_rating"
-              onChange={(event) =>
-                onEnteredValues("power_rating", event.target.value)
-              }
+              onChange={(event) => {
+                const value = Number(event.target.value); // Convert to number
+
+                // Update power_rating
+                onEnteredValues("power_rating", value);
+
+                // Update p dictionary: all entries become [value, value, value]
+                const updatedP = Object.fromEntries(
+                  Object.entries(device.p ?? {}).map(([key, arr]) => [
+                    key,
+                    new Array(arr.length).fill(value),
+                  ])
+                );
+                onEnteredValues("p", updatedP);
+              }}
               value={device.power_rating}
             />
           </div>
