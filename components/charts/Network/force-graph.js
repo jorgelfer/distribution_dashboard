@@ -156,6 +156,21 @@ export default function ForceGraph(props) {
   const [nodes, setNodes] = useState(initNodes);
   const [links, setLinks] = useState(newLinks);
 
+  // trigger re-render when data changes
+  useEffect(() => {
+    setNodes(props.data.bus.map((d) => ({ ...d })));
+    setLinks(
+      // rebuild links from latest data
+      props.data.branch.map((d) => {
+        return {
+          ...d,
+          source: props.data.bus.find((b) => b.uid === d.source),
+          target: props.data.bus.find((b) => b.uid === d.target),
+        };
+      })
+    );
+  }, [props.data]);
+
   //////////////////////////////////
   // Brush
   const brushRef = useRef();

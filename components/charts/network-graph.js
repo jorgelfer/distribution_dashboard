@@ -65,61 +65,48 @@ export default function NetworkGraph({ margin, data, ...props }) {
     [data, props.selectedValue]
   );
 
+  const [, setForceUpdate] = useState(0);
   const handleDeleteBuses = useCallback(
     (buses) => {
-      console.log(buses);
+      const busSet = new Set(buses);
+
       // delete the buses from the data
-      data["bus"] = data["bus"].filter((f) => !buses.includes(f.uid));
+      data["bus"] = data["bus"].filter((b) => !busSet.has(b.uid));
       // data['bus'] = data['bus'].filter(f => console.log(f.uid));
 
       // delete associated branches
       data["branch"] = data["branch"].filter(
-        (f) => !buses.includes(f.source) && !buses.includes(f.target)
+        (br) => !busSet.has(br.source) && !busSet.has(br.target)
       );
 
       // delete isolated buses
-      data["bus"] = data["bus"].filter((f) => {
-        return data["branch"].some(
-          (d) => d.source === f.uid || d.target === f.uid
-        );
-      });
-
-      // delete associated loads
-      data["load"] = data["load"].filter((f) => !buses.includes(f.bus));
-
-      // delete associated capacitors
-      data["capacitor"] = data["capacitor"].filter(
-        (f) => !buses.includes(f.bus)
+      data["bus"] = data["bus"].filter((b) =>
+        data["branch"].some((br) => br.source === b.uid || br.target === b.uid)
       );
 
-      // delete asocciated batteries
-      if (data["battery"]) {
-        data["battery"] = data["battery"].filter((f) => !buses.includes(f.bus));
-      }
+      // Remove associated components
+      const componentKeys = [
+        "load",
+        "capacitor",
+        "battery",
+        "dr_load",
+        "flex_gen",
+        "flex_load",
+      ];
 
-      // delete associated dr_load
-      if (data["dr_load"]) {
-        data["dr_load"] = data["dr_load"].filter((f) => !buses.includes(f.bus));
-      }
-
-      // delete associated flex_gen
-      if (data["flex_gen"]) {
-        data["flex_gen"] = data["flex_gen"].filter(
-          (f) => !buses.includes(f.bus)
-        );
-      }
-
-      // delete associated flex_load
-      if (data["flex_load"]) {
-        data["flex_load"] = data["flex_load"].filter(
-          (f) => !buses.includes(f.bus)
-        );
+      for (const key of componentKeys) {
+        if (Array.isArray(data[key])) {
+          data[key] = data[key].filter((item) => !busSet.has(item.bus));
+        }
       }
 
       // update network data
       network = JSON.parse(JSON.stringify(data));
+
+      // Trigger re-render
+      setForceUpdate((prev) => prev + 1);
     },
-    [data, props.selectedValue]
+    [data]
   );
 
   // active layer

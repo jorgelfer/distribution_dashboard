@@ -59,8 +59,32 @@ export default function Header({ handleClick, selectedValue, data }) {
     queryClient.setQueryData(
       ["opendss", caseCtx.case.networkModel, caseCtx.case.inFile1],
       (oldData) => {
+        if (!oldData) return oldData;
         // oldData is the current cached data for 'myData'
-        return data;
+
+        // keys from data not in oldData
+        const keysToAdd = Object.keys(data).filter(
+          (key) => !Object.prototype.hasOwnProperty.call(oldData, key)
+        );
+
+        const newKeys = Object.fromEntries(
+          keysToAdd.map((key) => [key, data[key]])
+        );
+
+        // keep only entries in oldData that are also present in data
+        const filterByUid = (oldArr = [], newArr = []) => {
+          const newUids = new Set(newArr.map((item) => item.uid));
+          return oldArr.filter((item) => newUids.has(item.uid));
+        };
+
+        return {
+          ...oldData,
+          ...newKeys,
+          bus: filterByUid(oldData.bus, data.bus),
+          branch: filterByUid(oldData.branch, data.branch),
+          capacitor: filterByUid(oldData.capacitor, data.capacitor),
+          load: filterByUid(oldData.load, data.load),
+        };
       }
     );
 
