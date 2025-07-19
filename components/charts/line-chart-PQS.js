@@ -10,7 +10,7 @@ import Axis from "../chartComponents/axis";
 const powers = [
   { id: "p", label: "Active" },
   { id: "q", label: "Reactive" },
-  { id: "s", label: "Aparent" },
+  { id: "s", label: "Apparent" },
 ];
 
 export default function LineChartPQS(props) {

@@ -119,7 +119,7 @@ export default function MapGeojson(props) {
     nodeEnter
       .append("image")
       .attr("class", "symbol")
-      .attr("xlink:href", Symbol(props.selectedValue))
+      .attr("xlink:href", Symbol(props.selectedValue).src)
       .attr("transform", "translate(2,2)")
       .attr("width", symbolSize)
       .attr("height", symbolSize)
