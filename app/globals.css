@@ -95,6 +95,10 @@ body {
   max-width: 25%;
 }
 
+.link {
+  stroke: #999;
+}
+
 .actions {
   display: flex;
   justify-content: flex-end;

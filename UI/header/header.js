@@ -11,6 +11,22 @@ import { CaseContext } from "@/store/case-data-context";
 import { renderPage } from "@/lib/actions";
 import { useQueryClient } from "@tanstack/react-query";
 
+function DataDisplay({ children, isSelected, ...props }) {
+  return (
+    <li
+      className={
+        isSelected
+          ? styles["main-tab"] + " " + styles.active
+          : styles["main-tab"]
+      }
+      {...props}
+    >
+      <Image src={children.image} alt={children.title} />
+      <p>{children.title}</p>
+    </li>
+  );
+}
+
 export default function Header({ handleClick, selectedValue, data }) {
   // get query client
   const queryClient = useQueryClient();
@@ -19,22 +35,7 @@ export default function Header({ handleClick, selectedValue, data }) {
   const caseCtx = useContext(CaseContext);
   const isEnabled = caseCtx.enabled;
 
-  function DataDisplay({ children, isSelected, ...props }) {
-    return (
-      <li
-        className={
-          isSelected
-            ? styles["main-tab"] + " " + styles.active
-            : styles["main-tab"]
-        }
-        {...props}
-      >
-        <Image src={children.image} alt={children.title} />
-        <p>{children.title}</p>
-      </li>
-    );
-  }
-
+  // dialog reference
   const dialog = useRef();
   function handleDetailsClick() {
     dialog.current.open();
@@ -43,6 +44,8 @@ export default function Header({ handleClick, selectedValue, data }) {
   const path = usePathname();
   function handleRunClick() {
     // Optimistically update the cache
+
+    console.log("data that will be updated");
     queryClient.setQueryData(
       ["opendss", caseCtx.case.networkModel, caseCtx.case.inFile1],
       (oldData) => {
@@ -71,6 +74,23 @@ export default function Header({ handleClick, selectedValue, data }) {
           branch: filterByUid(oldData.branch, data.branch),
           capacitor: filterByUid(oldData.capacitor, data.capacitor),
           load: filterByUid(oldData.load, data.load),
+          // special handling for user-defined components
+          // flex_load:
+          //   "flex_load" in oldData && Array.isArray(data.flex_load)
+          //     ? [...data.flex_load]
+          //     : oldData.flex_load,
+          // flex_gen:
+          //   "flex_gen" in oldData && Array.isArray(data.flex_gen)
+          //     ? [...data.flex_gen]
+          //     : oldData.flex_gen,
+          // dr_load:
+          //   "dr_load" in oldData && Array.isArray(data.dr_load)
+          //     ? [...data.dr_load]
+          //     : oldData.dr_load,
+          // battery:
+          //   "battery" in oldData && Array.isArray(data.battery)
+          //     ? [...data.battery]
+          //     : oldData.battery,
         };
       }
     );
@@ -108,6 +128,7 @@ export default function Header({ handleClick, selectedValue, data }) {
               className={styles["details-flat"]}
               disabled={!isEnabled}
               onClick={handleDetailsClick}
+              aria-label="Open solution details"
             >
               Solution details
             </button>

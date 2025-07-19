@@ -5,18 +5,19 @@ import Card from "@/UI/card/card";
 import ChartContainer from "../chartComponents/chartContainer";
 import Buttons from "@/interactions/buttons";
 
-import NodeBreaker from "./network/nodeBreaker";
-import Net from "./network/net";
-import ForceGraph from "./network/force-graph";
-
-import GeojsonMap from "./mapping/GeojsonMap";
 import bronx from "./mapping/bronx.json";
-
 import Form from "@/UI/device/form";
 
 // to download the graph as a PDF
 import html2canvas from "html2canvas";
 import { jsPDF } from "jspdf";
+
+import { useQueryClient } from "@tanstack/react-query";
+
+import ForceGraph from "./network/force-graph";
+import NodeBreaker from "./network/nodeBreaker";
+import Net from "./network/net";
+import GeojsonMap from "./mapping/GeojsonMap";
 
 const layers = [
   { id: "react", label: "React.js" },
@@ -28,6 +29,7 @@ const layers = [
 ];
 
 export default function NetworkGraph({ margin, data, ...props }) {
+  // chart constants
   const width = 1000;
   const height = 590;
   const innerWidth = width - margin.left - margin.right;
@@ -46,26 +48,22 @@ export default function NetworkGraph({ margin, data, ...props }) {
   // so, make a deep copy of the dataset
   var network = JSON.parse(JSON.stringify(data));
 
+  const [, setForceUpdate] = useState(0);
   const handleSubmitDevice = useCallback(
     (device, remove) => {
-      // initialize device container
-      data[`${props.selectedValue}`] = data[`${props.selectedValue}`] || [];
-      // filter out the devices in case it is already in the network
-      data[`${props.selectedValue}`] = data[`${props.selectedValue}`].filter(
-        (f) => f.uid !== device.uid
-      );
+      const key = props.selectedValue;
+      data[key] = data[key] || [];
+      data[key] = data[key].filter((d) => d.uid !== device.uid);
       // append the device to the network
       if (!remove) {
         data[`${props.selectedValue}`].push(device);
       }
-
       // disassociate the data to avoid mutations
-      network = JSON.parse(JSON.stringify(data));
+      setForceUpdate((prev) => prev + 1);
     },
     [data, props.selectedValue]
   );
 
-  const [, setForceUpdate] = useState(0);
   const handleDeleteBuses = useCallback(
     (buses) => {
       const busSet = new Set(buses);

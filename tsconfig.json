@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "UI/login/login.tsx", "lib/actions.js", "app/providers.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "UI/login/login.tsx", "lib/actions.js", "app/providers.tsx", "UI/header/header.js", "components/charts/charts.js"],
   "exclude": ["node_modules"]
 }

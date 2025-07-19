@@ -8,21 +8,22 @@ import LineChartBSS from "./line-chart-BSS";
 import NetworkGraph from "./network-graph";
 import { updateData } from "@/data/update";
 
+var colorScale = d3
+  .scaleQuantile()
+  .domain([0, 1, 2, 3, 4])
+  .range(["red", "#f28e2c", "#59a14f", "#4e79a7", "red"]);
+
+const dateParser = d3.timeParse("%Y-%m-%dT%H:%M");
+
 export default function Charts(props) {
   const margin = { top: 30, right: 30, bottom: 50, left: 70 };
-  var colorScale = d3
-    .scaleQuantile()
-    .domain([0, 1, 2, 3, 4])
-    .range(["red", "#f28e2c", "#59a14f", "#4e79a7", "red"]);
-
-  const dateParser = d3.timeParse("%Y-%m-%dT%H:%M");
 
   // Header
   const [selectedValue, setSelectedValue] = useState("vsource");
   function handleClick(selectedButton) {
-    if (selectedValue !== selectedButton) {
-      setSelectedValue(selectedButton);
-    }
+    setSelectedValue((prev) =>
+      prev !== selectedButton ? selectedButton : prev
+    );
   }
 
   // selected buses
@@ -53,6 +54,14 @@ export default function Charts(props) {
     props.vm_base
   );
 
+  const showPQS = [
+    "vsource",
+    "load",
+    "dr_load",
+    "flex_gen",
+    "flex_load",
+    "mismatch",
+  ].includes(selectedValue);
   return (
     <>
       <Header
@@ -130,14 +139,7 @@ export default function Charts(props) {
                   selectedValue={selectedValue}
                 />
               )}
-              {[
-                "vsource",
-                "load",
-                "dr_load",
-                "flex_gen",
-                "flex_load",
-                "mismatch",
-              ].includes(selectedValue) && (
+              {showPQS && (
                 <LineChartPQS
                   margin={margin}
                   data={data}

@@ -108,7 +108,7 @@ export default function Net(props) {
     myNodes
       .append("image")
       .attr("class", "symbol")
-      .attr("xlink:href", Symbol(props.selectedValue))
+      .attr("xlink:href", Symbol(props.selectedValue).src)
       .attr("transform", "translate(5,5)")
       .attr("width", 25)
       .attr("height", 25)
@@ -286,9 +286,9 @@ export default function Net(props) {
           y={10 + i * 35}
           className="interaction"
           opacity={props.selectedAction === action.value ? 1 : 0.6}
-          heigth={25}
+          height={25}
           width={25}
-          href={ActionIcons(action.value)}
+          href={ActionIcons(action.value).src}
           onClick={() => props.onSelectedAction(action.value)}
         ></image>
       ))}
