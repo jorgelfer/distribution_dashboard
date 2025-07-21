@@ -22,7 +22,10 @@ const ShowScheduling: React.FC = () => {
     refetchOnMount: false,
     refetchOnReconnect: false,
   });
-  console.log("OpenDSS data:", opendssData);
+  // console.log("OpenDSS data:", opendssData);
+
+  // store inFile1 in OpenDSS data
+  opendssData["inFile1"] = inFile1;
 
   // energy scheduling call
   opendssData["kVA_base"] =

@@ -10,6 +10,7 @@ interface ChildHandle {
 interface SolutionData {
   error_it: number[]; // Replace 'any' with the actual type if known
   time_it: number[]; // Replace 'any' with the actual type if known
+  mse: number[]; // Mean Squared Error, replace with actual type if needed
   // add other properties of 'solution' if needed
 }
 
@@ -45,6 +46,8 @@ const PowerFlowDetailsModal = forwardRef<ChildHandle, ChildProps>(
       0
     );
     conv_time = parseFloat(conv_time.toFixed(4));
+
+    console.log(props.data.solution.mse);
 
     return (
       <dialog ref={dialog} className={styles["config-modal"]}>

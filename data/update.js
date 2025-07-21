@@ -296,7 +296,13 @@ export function updateData(
       });
 
       // vertical scale
-      return [vdata, vextent, data, d3.extent(data.flat().map((d) => d.s))];
+      const s_extent = d3.extent(data.flat().map((d) => d.s));
+      const p_extent = d3.extent(data.flat().map((d) => d.p));
+      const q_extent = d3.extent(data.flat().map((d) => d.q));
+
+      const min_y = Math.min(s_extent[0], p_extent[0], q_extent[0]);
+      const max_y = Math.max(s_extent[1], p_extent[1], q_extent[1]);
+      return [vdata, vextent, data, [min_y, max_y]];
 
     default:
       return [vdata, vextent, data, [0, 0]];
